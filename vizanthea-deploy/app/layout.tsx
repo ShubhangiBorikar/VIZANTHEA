@@ -42,33 +42,34 @@ const localizeRecoveredSite = `
       }
 
       if (!proof.querySelector('.operating-system')) {
-        proofGrid.insertAdjacentHTML('afterend', `
-          <div class="operating-system">
-            <p class="micro-label">HOW I APPROACH ANALYTICS</p>
-            <div>
-              <span>Business Question</span><i>→</i>
-              <span>Trusted Metric</span><i>→</i>
-              <span>Investigation</span><i>→</i>
-              <span>Experiment or Model</span><i>→</i>
-              <span>Decision</span>
-            </div>
-          </div>
-          <div class="ask-panel">
-            <div>
-              <p class="micro-label">EXPLORE MY EXPERIENCE</p>
-              <h3>Connect my experience to different business needs.</h3>
-              <p>Select a question to explore my background and analytical approach.</p>
-            </div>
-            <div>
-              <div class="ask-buttons">
-                <button class="active" type="button">What are your strengths?</button>
-                <button type="button">How do you use AI?</button>
-                <button type="button">Which roles fit you?</button>
-              </div>
-              <p class="portfolio-answer">I connect customer, product, revenue, and operational signals—then translate them into governed metrics, forecasts, experiments, and decisions.</p>
-            </div>
-          </div>
-        `);
+        const extraProofMarkup = [
+          '<div class="operating-system">',
+          '<p class="micro-label">HOW I APPROACH ANALYTICS</p>',
+          '<div>',
+          '<span>Business Question</span><i>→</i>',
+          '<span>Trusted Metric</span><i>→</i>',
+          '<span>Investigation</span><i>→</i>',
+          '<span>Experiment or Model</span><i>→</i>',
+          '<span>Decision</span>',
+          '</div>',
+          '</div>',
+          '<div class="ask-panel">',
+          '<div>',
+          '<p class="micro-label">EXPLORE MY EXPERIENCE</p>',
+          '<h3>Connect my experience to different business needs.</h3>',
+          '<p>Select a question to explore my background and analytical approach.</p>',
+          '</div>',
+          '<div>',
+          '<div class="ask-buttons">',
+          '<button class="active" type="button">What are your strengths?</button>',
+          '<button type="button">How do you use AI?</button>',
+          '<button type="button">Which roles fit you?</button>',
+          '</div>',
+          '<p class="portfolio-answer">I connect customer, product, revenue, and operational signals—then translate them into governed metrics, forecasts, experiments, and decisions.</p>',
+          '</div>',
+          '</div>'
+        ].join('');
+        proofGrid.insertAdjacentHTML('afterend', extraProofMarkup);
       }
     }
   };

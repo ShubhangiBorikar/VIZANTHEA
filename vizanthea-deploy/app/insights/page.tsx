@@ -84,6 +84,7 @@ export default function InsightsPage() {
           </article>
         </div>
       )}
+      <style jsx global>{`.insights-page{background-image:url('/images/floral-bg-final.png')!important;background-size:520px!important}`}</style>
     </div>
   );
 }

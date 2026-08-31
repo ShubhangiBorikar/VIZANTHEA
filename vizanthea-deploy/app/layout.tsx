@@ -19,7 +19,7 @@ const localizeRecoveredSite = `
     });
 
     document.querySelectorAll('img[src="https://data-loom-clean.shubhangiborikar.chatgpt.site/shubhangi-borikar-headshot.jpeg"]').forEach((img) => {
-      img.setAttribute('src', '/images/headshot.png');
+      img.setAttribute('src', '/images/shubhangi-profile.jpg');
     });
   };
 

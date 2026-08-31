@@ -1,221 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
-import Layout from "./components/Layout";
+import { useEffect } from "react";
 
-const slides = [
-  "https://placehold.co/800x500/096181/096181",
-  "https://placehold.co/800x500/1a2235/1a2235",
-  "https://placehold.co/800x500/b8a5d8/b8a5d8",
-  "https://placehold.co/800x500/d4456a/d4456a",
-  "https://placehold.co/800x500/0a8a9e/0a8a9e",
-  "https://placehold.co/800x500/7b5ea7/7b5ea7",
-];
-
-function useScrollReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.15 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return { ref, visible };
-}
-
-function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          const duration = 2000;
-          const startTime = performance.now();
-          const animate = (now: number) => {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * end));
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [end]);
-
-  return <span ref={ref}>{prefix}{count}{suffix}</span>;
-}
-
-function Slideshow() {
-  const [current, setCurrent] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const goTo = useCallback((idx: number) => {
-    setCurrent((idx + slides.length) % slides.length);
-  }, []);
-
-  useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, []);
-
-  return (
-    <div className="slideshow" data-testid="slideshow">
-      {slides.map((url, i) => (
-        <div
-          key={i}
-          className={`slide ${i === current ? "active" : ""}`}
-          style={{ backgroundImage: `url('${url}')` }}
-        />
-      ))}
-      <button className="slide-arrow arrow-prev" data-testid="slide-prev" onClick={() => goTo(current - 1)}>
-        <svg width="32" height="32" viewBox="0 0 32 32"><path d="M11.433 15.992L22.69 5.712c.393-.39.393-1.03 0-1.42-.393-.39-1.03-.39-1.423 0l-11.98 10.94c-.21.21-.3.49-.285.76-.015.28.075.56.284.77l11.98 10.94c.393.39 1.03.39 1.424 0 .393-.4.393-1.03 0-1.42l-11.257-10.29" fillRule="evenodd"/></svg>
-      </button>
-      <button className="slide-arrow arrow-next" data-testid="slide-next" onClick={() => goTo(current + 1)}>
-        <svg width="32" height="32" viewBox="0 0 32 32"><path d="M10.722 4.293c-.394-.39-1.032-.39-1.427 0-.393.39-.393 1.03 0 1.42l11.283 10.28-11.283 10.29c-.393.39-.393 1.02 0 1.42.395.39 1.033.39 1.427 0l12.007-10.94c.21-.21.3-.49.284-.77.014-.27-.076-.55-.286-.76L10.72 4.293z" fillRule="evenodd"/></svg>
-      </button>
-      <div className="slide-dots">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            className={`slide-dot ${i === current ? "active" : ""}`}
-            data-testid={`slide-dot-${i}`}
-            onClick={() => goTo(i)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+const recoveredMarkup = `<header><a class="site-brand" href="#top"><img alt="" src="https://data-loom-clean.shubhangiborikar.chatgpt.site/vizanthea-logo-clean.png"/><span>VIZANTHEA</span></a><nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#proof">Applied Practice</a><a href="#experience">Experience</a><a href="https://data-loom-clean.shubhangiborikar.chatgpt.site/insights">Insights</a><a href="#contact">Contact</a></nav></header><main><section class="hero section-pad" id="top"><div class="hero-copy"><div aria-hidden="true" class="brand-orbit"><span class="orbit-ring"></span><span class="orbit-spark spark-one"></span><span class="orbit-spark spark-two"></span><span class="orbit-spark spark-three"></span><img alt="" src="https://data-loom-clean.shubhangiborikar.chatgpt.site/vizanthea-logo-clean.png"/></div><p class="availability"><span></span>Available for Bay Area and Remote Opportunities</p><h1>Shubhangi<br/>Borikar</h1><p class="specialties">Senior Data &amp; Product Operations Analyst  |  Forecasting &amp; Trend Analysis  |  Customer Lifecycle &amp; Revenue Analytics  |  Data Strategy, Automation &amp; AI  |  Executive Decision Support</p><p class="hero-line"><em>I turn messy data into clear decisions—and clear decisions into measurable growth.</em></p><p>Product analytics professional with 7+ years of experience turning ambiguous customer, product, and revenue questions into structured analyses, strategic forecasts, rigorous experiments, and scalable data solutions.</p><p>Specialized in customer lifecycle and retention analytics, KPI development, forecasting, data governance, and executive decision support—using SQL, Python, Snowflake, dbt, Tableau, and AI-enabled automation to build trusted data products and reporting workflows that move businesses from insight to action.</p><div class="hero-actions"><a href="#experience">View Experience <span>→</span></a><a href="#contact">Contact</a></div><div class="hero-links"><a aria-label="View my LinkedIn" class="icon-link" data-tip="View my LinkedIn" href="https://www.linkedin.com/in/shubhangiborikar" rel="noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.5 8.2H3.4V18h3.1V8.2ZM5 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM18.7 12.4c0-3-1.6-4.4-3.8-4.4-1.8 0-2.6 1-3 1.7V8.2H8.8V18h3.1v-4.9c0-1.3.3-2.6 1.9-2.6 1.6 0 1.7 1.5 1.7 2.7V18h3.1l.1-5.6Z" fill="currentColor"></path></svg></a><a aria-label="Download my resume" class="icon-link" data-tip="Download my resume" download="" href="https://data-loom-clean.shubhangiborikar.chatgpt.site/Shubhangi_Borikar_Resume.pdf"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path></svg></a><a aria-label="Email me" class="icon-link" data-tip="Email me" href="mailto:shubhangiborikar@gmail.com"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6.5h16v11H4v-11Zm1 .5 7 5 7-5" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path></svg></a></div></div><div class="portrait"><img alt="Shubhangi Borikar" src="https://data-loom-clean.shubhangiborikar.chatgpt.site/shubhangi-borikar-headshot.jpeg"/></div></section><section aria-label="Career highlights" class="stats-strip"><div><strong>7+ Years</strong><span>Analytics &amp; Business Experience</span></div><div><strong>Connected Analytics</strong><span>Customer, Product &amp; Revenue</span></div><div><strong>Cross-Functional</strong><span>Product, Engineering &amp; Leadership Collaboration</span></div><div><strong>Data Architecture</strong><span>Data Modeling, Governance &amp; Visualization</span></div><div><strong>Experimentation</strong><span>A/B Testing, Measurement &amp; Experiment Analysis</span></div><div><strong>Modern Analytics</strong><span>AI-Enabled Automation &amp; Predictive Analytics</span></div></section><section class="section-pad" id="about"><div class="section-label"><span>S.01</span><i></i><span>ABOUT</span></div><div class="split"><h2>Analytics Isn't Just Creating Dashboards.</h2><div class="narrative"><p class="lead">My background spans disciplines that are often treated separately—analytics, product, customer experience, finance, and operations.</p><p>I have worked at the intersections where decisions often get lost—between finance protecting margin, marketing shaping offers, customer support hearing friction first, product defining the experience, and engineering making it real.</p><p>I bring those signals together to design experiments and promotions, evaluate outcomes, investigate anomalies, and turn recurring customer problems into product features worth building.</p><p>I do not only ask:</p><p class="quote">“What does the dashboard show?”</p><p>I also ask:</p><div class="questions"><em>“What changed—and when did the trend begin?”</em><em>“What is driving the trend, whether positive or negative?”</em><em>“Is this a genuine business signal or a data-quality issue?”</em><em>“What is the customer actually experiencing?”</em><em>“What should we test, fix, scale, or build next?”</em></div><p>That perspective has followed me throughout my career—from cross-functional analysis and experimentation to data governance, forecasting, and product strategy.</p></div></div></section><section class="section-pad muted" id="skills"><div class="section-label"><span>S.02</span><i></i><span>CORE CAPABILITIES</span></div><h2>A multidisciplinary analytics toolkit built to turn complex data into confident business decisions.</h2><div class="tool-grid"><article><h3><span>01</span>Analytics &amp; Experimentation</h3><div class="tags"><span>SQL</span><span>Python</span><span>Pandas</span><span>Statistical Analysis</span><span>A/B Testing</span><span>Hypothesis Testing</span><span>Customer Segmentation</span><span>Cohort Analysis</span><span>Retention &amp; Churn</span><span>KPI Development</span><span>Root Cause Analysis</span></div></article><article><h3><span>02</span>Data Engineering &amp; Governance</h3><div class="tags"><span>Snowflake</span><span>dbt</span><span>ETL / ELT</span><span>Data Modeling</span><span>Data Quality</span><span>Data Governance</span><span>Metric Definitions</span><span>Data Lineage</span><span>Secoda</span><span>GitHub</span></div></article><article><h3><span>03</span>Business Intelligence &amp; Forecasting</h3><div class="tags"><span>Tableau</span><span>Power BI</span><span>Excel</span><span>Power Query</span><span>Forecasting</span><span>Executive Dashboards</span><span>Revenue Analytics</span><span>Customer Lifetime Value</span><span>Scenario Modeling</span><span>Data Storytelling</span></div></article><article><h3><span>04</span>Product Strategy &amp; Leadership</h3><div class="tags"><span>Product Analytics</span><span>Customer Lifecycle Strategy</span><span>Experiment Design</span><span>Requirements Gathering</span><span>Cross-Functional Leadership</span><span>Stakeholder Management</span><span>Executive Communication</span><span>Process Improvement</span><span>AI-Enabled Automation</span><span>JIRA</span></div></article></div></section><section class="section-pad proof" id="proof"><div class="section-label"><span>S.03</span><i></i><span>AREAS OF APPLIED PRACTICE</span></div><div class="proof-intro"><h2>A Closer Look at How I Approach Analytical Questions.</h2><p>These interactive examples use synthetic scenarios to illustrate how I frame questions, investigate signals, and translate evidence into action.</p></div><div class="lens-panel"><div><p class="micro-label">CHOOSE A ROLE LENS</p><h3>Different functions. The same analytical discipline.</h3></div><div class="lens-buttons"><button class="active">Product</button><button>Marketing</button><button>Growth</button><button>Strategy</button></div><div class="lens-output"><span>Feature adoption</span><span>Journey friction</span><span>Experiment design</span></div></div><div class="case-study"><div class="case-copy"><p class="micro-label">INTERACTIVE CASE STUDY / SIGNAL INVESTIGATION</p><h2>A KPI changed. What should we investigate first?</h2><p>Renewal rate is holding steady—then suddenly declines. Choose an investigative lens to see how I would approach the signal.</p><div class="investigation-buttons"><button class="active">Customer segments</button><button>Data quality</button><button>Customer journey</button><button>Offer changes</button></div></div><div class="signal"><div class="signal-head"><div><span>RENEWAL RATE</span><strong>71.4%</strong></div><b>↓ sudden decline detected</b></div><svg aria-label="Renewal rate remains stable and then declines" role="img" viewBox="0 0 620 180"><path class="gridline" d="M20 45H600M20 90H600M20 135H600"></path><path class="trendline" d="M22 68C80 62 112 73 160 67S238 63 285 69S356 61 403 67S458 71 480 74L516 115L558 128L598 125"></path><circle cx="516" cy="115" r="5"></circle><text x="490" y="102">change begins</text></svg><div class="finding"><div><span>FINDING</span><strong>Newer customers declined first</strong></div><p>The movement is concentrated in early-tenure cohorts.</p><p><b>Next action:</b> Test a simplified renewal path for the affected group.</p></div></div></div><div class="proof-grid"><article><span>01</span><h3>Experiment Design</h3><p>Hypothesis framing, control strategy, guardrail metrics, significance testing, and decision rules.</p><small>Synthetic A/B testing brief</small></article><article><span>02</span><h3>Forecasting</h3><p>Driver-based forecasts, scenario ranges, assumptions, risks, and executive-ready recommendations.</p><small>Scenario-model blueprint</small></article><article><span>03</span><h3>Data Governance</h3><p>Metric definitions, ownership, validation checks, lineage, and a trusted reporting layer.</p><small>KPI governance framework</small></article><article><span>04</span><h3>Customer Lifecycle</h3><p>Journey analysis, cohort behavior, churn signals, retention opportunities, and revenue implications.</p><small>Lifecycle analytics framework</small></article></div></section><section class="section-pad experience" id="experience"><div class="section-label"><span>S.04</span><i></i><span>EXPERIENCE</span></div><div class="experience-intro"><h2>Built Across Industries. Grounded in the Same Discipline.</h2><p>My career has moved across customer analytics, operations, healthcare, CRM, forecasting, experimentation, and data architecture—but the core responsibility has stayed consistent: turn complex information into decisions people can trust.</p></div><div class="timeline"><article><div><p class="date">February 2023 — Present</p><h3>Analyst, Business Analytics</h3><p class="company">TransformCo · <span>Hayward, California</span></p></div><ul><li>Built governed analytics foundations across multiple product lines.</li><li>Connected customer, revenue, claims, service, and operational data.</li><li>Designed retention, pricing, loyalty, and lifecycle experiments.</li><li>Transformed behavioral patterns into forecasts and business actions.</li><li>Established trusted KPIs, reusable data models, and executive reporting.</li><li>Challenged unreliable data and model outputs before they influenced decisions.</li></ul></article><article><div><p class="date">April 2018 — May 2020</p><h3>Senior Data Analyst</h3><p class="company">ID Medical · <span>Pune, India</span></p></div><ul><li>Forecasted workforce demand and operational capacity.</li><li>Modeled employee churn and its underlying drivers.</li><li>Analyzed acquisition funnels and registration behavior.</li><li>Designed experiments to improve customer conversion.</li><li>Built self-service SQL and Tableau reporting.</li></ul></article><article><div><p class="date">June 2017 — April 2018</p><h3>Salesforce Administrator — Reporting &amp; Analytics</h3><p class="company">Cognizant · <span>Pune, India</span></p></div><ul><li>Supported enterprise Salesforce CRM and CPQ reporting.</li><li>Investigated data discrepancies and reporting failures.</li><li>Translated business requirements into reliable solutions.</li><li>Improved issue prioritization and operational workflows.</li><li>Helped users move from platform data to trusted insights.</li></ul></article></div><p class="closing">The industries changed. The questions evolved. The work remained the same: find what matters and make it actionable.</p></section><section class="section-pad"><div class="section-label"><span>S.05</span><i></i><span>AI / NEXT-GENERATION ANALYTICS</span></div><div class="split ai-split"><div><h2>Dashboards Wait to Be Read. The Next Generation of Analytics Watches Back.</h2><p>AI is moving analytics from a pull system—where someone must open a dashboard and search for answers—to a push system that can monitor signals, detect meaningful changes, investigate possible drivers, and direct attention toward what requires action.</p><p>Today, I use AI to structure ambiguous questions, accelerate SQL and Python development, debug logic, generate validation scenarios, document analytical processes, challenge interpretations, and tailor findings for different stakeholders.</p><p>The next step is building analytical systems that observe, investigate, explain, and learn alongside the analyst.</p></div><aside><h3>WHAT I AM BUILDING TOWARD</h3><div class="ai-item"><span>01</span><div><strong>LLM-Orchestrated Analytics</strong><p>Connect query generation, validation, interpretation, and business storytelling within repeatable analytical workflows.</p></div></div><div class="ai-item"><span>02</span><div><strong>Metric-Watching Agents</strong><p>Create agents that monitor KPIs, detect sudden changes, investigate contributing factors, and notify the right decision-maker.</p></div></div><div class="ai-item"><span>03</span><div><strong>Conversational Dashboards</strong><p>Let stakeholders ask business questions in everyday language and receive governed, visual answers.</p></div></div><div class="ai-item"><span>04</span><div><strong>AI-Enhanced Predictive Models</strong><p>Combine generative AI and machine learning to accelerate feature discovery, diagnostics, and scenario exploration without replacing statistical validation.</p></div></div><div class="ai-item"><span>05</span><div><strong>Unstructured Signal Mining</strong><p>Transform feedback, service notes, surveys, and support conversations into measurable themes and emerging friction signals.</p></div></div><div class="ai-item"><span>06</span><div><strong>Self-Documenting Data Products</strong><p>Keep metric definitions, validation tests, lineage summaries, and analytical knowledge current as systems evolve.</p></div></div><div class="ai-item"><span>07</span><div><strong>Decision-Simulation Copilots</strong><p>Help leaders explore forecasts, assumptions, trade-offs, and possible outcomes before committing to a decision.</p></div></div><p class="ai-closing">The future is not a smarter dashboard. It is an analytical system that knows when to look.</p><small>Not presented as years of end-to-end AI automation experience—grounded in capabilities already in practice, expanded through solutions actively in development, and framed as the deliberate next evolution of an established data analytics career.</small></aside></div></section><section class="section-pad muted"><div class="section-label"><span>S.06</span><i></i><span>EDUCATION</span></div><div class="education"><article><div><p class="date">December 2022</p><h3>California State University, Northridge</h3></div><strong>Master of Science — Engineering Management</strong></article><article><div><p class="date">June 2017</p><h3>Priyadarshini J.L. College of Engineering, India</h3></div><strong>Bachelor of Engineering — Electronics &amp; Telecommunications</strong></article></div></section><section class="section-pad"><div class="section-label"><span>S.07</span><i></i><span>HOW I CREATE IMPACT</span></div><h2>Where I Can Make an Immediate Impact</h2><div class="philosophy"><em>Analytics changes context—not logic.</em><p>Product, marketing, customer, and operational analytics may appear different, but the underlying system is often the same: inputs, outputs, and the decisions connecting them.</p><p>Once the right KPIs are defined—and we understand what influences them—a strong analyst can adapt across functions, uncover the drivers behind performance, and determine what should happen next.</p></div><div class="impact-grid"><article><span>01</span><h3>Follow the Signal</h3><p class="category">Product, Marketing &amp; Customer Analytics</p><p>Connect campaign exposure, customer behavior, and product usage to reveal what is moving the business—and why.</p></article><article><span>02</span><h3>Find Where Value Leaks</h3><p class="category">Lifecycle, Retention &amp; Growth</p><p>Trace where acquisition, engagement, renewals, churn, lifetime value, and revenue strengthen, weaken, or stall.</p></article><article><span>03</span><h3>Turn “What If?” Into Evidence</h3><p class="category">Forecasting &amp; Experimentation</p><p>Model what could happen, test what should happen, and measure what actually happened.</p></article><article><span>04</span><h3>Build One Version of Truth</h3><p class="category">Data Strategy &amp; Governance</p><p>Create shared definitions, quality controls, scalable models, and executive reporting so every decision begins with trusted data.</p></article></div></section><section class="contact section-pad" id="contact"><div class="section-label"><span>S.08</span><i></i><span>CONTACT</span></div><h2>Your next growth opportunity may already be in the data. Let's uncover it together.</h2><p class="contact-quote"><em>Growth rarely announces itself. It hides between the threads—customer behavior, product signals, and revenue patterns. I weave them together until the next move becomes clear.</em></p><div class="actions"><a class="linkedin" href="https://www.linkedin.com/in/shubhangiborikar" rel="noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.5 8.2H3.4V18h3.1V8.2ZM5 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM18.7 12.4c0-3-1.6-4.4-3.8-4.4-1.8 0-2.6 1-3 1.7V8.2H8.8V18h3.1v-4.9c0-1.3.3-2.6 1.9-2.6 1.6 0 1.7 1.5 1.7 2.7V18h3.1l.1-5.6Z" fill="currentColor"></path></svg> Connect on LinkedIn ↗</a><a class="resume-button" download="Shubhangi_Borikar_Resume.pdf" href="https://data-loom-clean.shubhangiborikar.chatgpt.site/Shubhangi_Borikar_Resume.pdf"><span aria-hidden="true">↓</span> Download Resume</a></div><p class="contact-note">Open to conversations with analytics leaders, product teams, and hiring managers seeking a strategic, hands-on analyst who can transform complex data into confident business decisions.</p></section></main><footer><div class="footer-identity"><span class="brand">SB</span><div><small>© 2026 Shubhangi Borikar. All rights reserved.</small><em>Powered by curiosity &amp; caffeine.</em></div></div><nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#proof">Applied Practice</a><a href="#experience">Experience</a><a href="https://data-loom-clean.shubhangiborikar.chatgpt.site/insights">Insights</a><a href="#contact">Contact</a></nav><div class="footer-links"><a href="https://www.linkedin.com/in/shubhangiborikar" rel="noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.5 8.2H3.4V18h3.1V8.2ZM5 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM18.7 12.4c0-3-1.6-4.4-3.8-4.4-1.8 0-2.6 1-3 1.7V8.2H8.8V18h3.1v-4.9c0-1.3.3-2.6 1.9-2.6 1.6 0 1.7 1.5 1.7 2.7V18h3.1l.1-5.6Z" fill="currentColor"></path></svg> LinkedIn</a><a href="mailto:shubhangiborikar@gmail.com">✉  Email</a><a download="Shubhangi_Borikar_Resume.pdf" href="https://data-loom-clean.shubhangiborikar.chatgpt.site/Shubhangi_Borikar_Resume.pdf"><span aria-hidden="true">↓</span> Download Resume</a></div></footer>`;
 
 export default function Home() {
-  const about = useScrollReveal();
-  const metrics = useScrollReveal();
-  const toolkit = useScrollReveal();
+  useEffect(() => {
+    const smooth = (event: Event) => {
+      const el = event.currentTarget as HTMLAnchorElement;
+      const href = el.getAttribute("href") || "";
+      if (href.startsWith("#")) {
+        event.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+    const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
+    anchors.forEach((a) => a.addEventListener("click", smooth));
+    return () => anchors.forEach((a) => a.removeEventListener("click", smooth));
+  }, []);
 
-  return (
-    <Layout>
-      <section className="dl-hero">
-        <div className="dl-hero-content">
-          <div className="animated-logo-container">
-            <div className="logo-aura"></div>
-            <div className="logo-aura logo-aura-2"></div>
-            <div className="logo-ring"></div>
-            <img src="/images/dataloom-icon-clean.png" alt="VIZANTHEA Logo" className="logo-img" />
-            <div className="logo-sparkles">
-              {[...Array(12)].map((_, i) => (
-                <span key={i} className={`sparkle sparkle-${i}`} />
-              ))}
-            </div>
-            <div className="logo-shimmer"></div>
-          </div>
-          <h1 className="dl-hero-title hero-title-anim">VIZANTHEA</h1>
-          <p className="dl-hero-tagline hero-tagline-anim">where data blooms into stories</p>
-          <p className="dl-hero-desc hero-desc-anim">
-            <strong>Guides. Portfolio. Ideas worth exploring.</strong><br/>For the curious mind — because every dataset has something worth showing.
-          </p>
-        </div>
-        <div className="dl-hero-visual">
-          <Slideshow />
-        </div>
-      </section>
-
-      <section className={`dl-about ${about.visible ? "revealed" : ""}`} ref={about.ref}>
-        <div className="dl-about-photo">
-          <img
-            src="/images/shubhangi-profile.jpg"
-            alt="Shubhangi Borikar"
-            data-testid="profile-photo"
-          />
-        </div>
-        <div className="dl-about-content">
-          <p className="dl-section-label">About Me</p>
-          <h2 className="dl-about-name">SHUBHANGI BORIKAR</h2>
-          <span className="dl-about-role" data-testid="about-role">Analyst. Builder. Storyteller.</span>
-          <blockquote className="dl-about-quote">
-            Some people see spreadsheets. <strong>I&apos;ve always seen the story hiding inside them</strong> — and spent my career learning how to make that story matter.
-          </blockquote>
-          <p className="dl-about-text">I&apos;ve spent 5+ years at the place where raw data becomes real decisions. I&apos;ve built the infrastructure that keeps information honest, designed the models that see customer behavior before it happens, and created the dashboards that turn skeptics into believers.</p>
-          <div className={`dl-metrics ${metrics.visible ? "revealed" : ""}`} ref={metrics.ref}>
-            <div className="dl-metric" data-testid="metric-revenue">
-              <span className="dl-metric-val"><AnimatedCounter end={700} prefix="$" suffix="K" /></span>
-              <span className="dl-metric-lbl">Revenue Protected</span>
-            </div>
-            <div className="dl-metric" data-testid="metric-efficiency">
-              <span className="dl-metric-val"><AnimatedCounter end={38} suffix="%" /></span>
-              <span className="dl-metric-lbl">Efficiency Gained</span>
-            </div>
-            <div className="dl-metric" data-testid="metric-years">
-              <span className="dl-metric-val"><AnimatedCounter end={5} suffix="+" /></span>
-              <span className="dl-metric-lbl">Years of Impact</span>
-            </div>
-          </div>
-          <p className="dl-about-text">What makes me different isn&apos;t just the SQL, the Snowflake pipelines, or the Tableau builds — it&apos;s that I never forget there&apos;s a <strong>human on the other side of every dataset</strong>. A customer who might churn. A team drowning in reports they don&apos;t trust. An executive who needs one clear answer, not seventeen caveats.</p>
-          <p className="dl-about-text">From cleaning messy CSVs at midnight to presenting insights to C-suite stakeholders, I&apos;ve done it all — and I genuinely enjoy every part of the process. I believe the best analysis doesn&apos;t just answer questions; <strong>it changes which questions get asked next</strong>.</p>
-          <div className="dl-about-cta">
-            I&apos;m drawn to environments where curiosity is valued as much as output, and where data isn&apos;t just a reporting function — it&apos;s how the business thinks. <strong>If that sounds like where you&apos;re building, I&apos;d love to be part of the conversation.</strong>
-          </div>
-        </div>
-      </section>
-
-      <section className={`dl-toolkit ${toolkit.visible ? "revealed" : ""}`} ref={toolkit.ref}>
-        <div className="dl-toolkit-inner">
-          <h2 className="dl-toolkit-heading">What I Work With</h2>
-          <p className="dl-toolkit-sub">The tools, techniques, and territories I bring to every project.</p>
-          <div className="dl-toolkit-grid">
-            <div className="dl-toolkit-group dl-toolkit-tools">
-              <div className="dl-toolkit-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-              </div>
-              <h3 className="dl-toolkit-cat">Languages &amp; Tools</h3>
-              <div className="dl-toolkit-tags">
-                {["SQL", "Python", "Power BI", "Tableau", "Advanced Excel", "Snowflake", "Redshift", "GitHub"].map((t) => (
-                  <span key={t} className="dl-tag" data-testid={`tag-${t.toLowerCase().replace(/\s/g,'-')}`}>{t}</span>
-                ))}
-              </div>
-            </div>
-            <div className="dl-toolkit-group dl-toolkit-analytics">
-              <div className="dl-toolkit-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 21H4.6c-.56 0-.84 0-1.054-.109a1 1 0 01-.437-.437C3 20.24 3 19.96 3 19.4V3m4 7.5v7m4-11v11m4-8v8m4-4.5v4.5"/></svg>
-              </div>
-              <h3 className="dl-toolkit-cat">Analytics &amp; ML</h3>
-              <div className="dl-toolkit-tags">
-                {["Predictive Analytics", "A/B Testing", "Customer Segmentation", "Churn Prediction", "CLV Modeling", "Time Series Forecasting", "Regression", "Clustering"].map((t) => (
-                  <span key={t} className="dl-tag" data-testid={`tag-${t.toLowerCase().replace(/\s/g,'-')}`}>{t}</span>
-                ))}
-              </div>
-            </div>
-            <div className="dl-toolkit-group dl-toolkit-domains">
-              <div className="dl-toolkit-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-              </div>
-              <h3 className="dl-toolkit-cat">Domains</h3>
-              <div className="dl-toolkit-tags">
-                {["E-commerce", "Healthcare", "Finance", "Supply Chain", "Marketing"].map((t) => (
-                  <span key={t} className="dl-tag dl-tag-domain" data-testid={`tag-${t.toLowerCase().replace(/\s/g,'-')}`}>{t}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </Layout>
-  );
+  return <div dangerouslySetInnerHTML={{ __html: recoveredMarkup }} />;
 }

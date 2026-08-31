@@ -19,7 +19,11 @@ const localizeRecoveredSite = `
     });
 
     document.querySelectorAll('img[src="https://data-loom-clean.shubhangiborikar.chatgpt.site/shubhangi-borikar-headshot.jpeg"]').forEach((img) => {
-      img.setAttribute('src', '/images/shubhangi-profile.jpg');
+      img.setAttribute('src', '/images/approved-headshot.jpg');
+    });
+
+    document.querySelectorAll('a[href="https://data-loom-clean.shubhangiborikar.chatgpt.site/Shubhangi_Borikar_Resume.pdf"]').forEach((a) => {
+      a.setAttribute('href', '/Shubhangi_Borikar_Resume.pdf');
     });
   };
 

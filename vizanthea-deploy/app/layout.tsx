@@ -144,6 +144,37 @@ const localizeRecoveredSite = `
         });
       });
     }
+
+    const insightImageMap = {
+      'Why Your Dashboard Isn’t Working (And How to Fix It)': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format&q=85',
+      'The SQL Patterns Every Analyst Should Know': 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=800&fit=crop&auto=format&q=85',
+      'From Spreadsheet to Story: A Data Visualization Journey': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Building a Data Culture: Lessons from the Trenches': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Predictive Analytics Without the PhD': 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Color Theory for Data Visualization': 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Dynamic Parameter Actions in Tableau': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Window Functions: The Complete Cheat Sheet': 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Building Small Multiples in Tableau': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Snowflake Performance Tuning Essentials': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop&auto=format&q=85',
+      'The Art of Effective Color Palettes': 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&h=800&fit=crop&auto=format&q=85',
+      'Python + Pandas: Data Cleaning Recipes': 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200&h=800&fit=crop&auto=format&q=85'
+    };
+
+    const applyInsightImages = () => {
+      document.querySelectorAll('.insights-card, .insights-modal').forEach((container) => {
+        const heading = container.querySelector('h2');
+        const img = container.querySelector('img');
+        if (!heading || !img) return;
+        const src = insightImageMap[heading.textContent?.trim() || ''];
+        if (src && img.getAttribute('src') !== src) img.setAttribute('src', src);
+      });
+    };
+
+    applyInsightImages();
+    if (document.querySelector('.insights-page')) {
+      const observer = new MutationObserver(applyInsightImages);
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
   };
 
   if (document.readyState === 'loading') {

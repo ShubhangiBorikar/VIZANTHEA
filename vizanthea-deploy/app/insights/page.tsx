@@ -71,6 +71,15 @@ const posts = [
   }
 ];
 
+const tips = [
+  { id: 1, title: "Start with the business question.", body: "Before writing SQL or opening a dashboard, define the decision the analysis needs to support." },
+  { id: 2, title: "Validate before you visualize.", body: "Reconcile key metrics and investigate anomalies before turning them into charts or recommendations." },
+  { id: 3, title: "Design for the next action.", body: "A useful insight should make it easier to decide what to test, fix, scale, or investigate next." },
+  { id: 4, title: "Separate signal from noise.", body: "Check whether a movement is structural, seasonal, segment-specific, or simply a data-quality issue." },
+  { id: 5, title: "Make assumptions visible.", body: "Forecasts and recommendations become more trustworthy when assumptions, risks, and guardrails are explicit." },
+  { id: 6, title: "End with what happens next.", body: "A strong analysis closes with a decision, experiment, owner, or next question—not another chart." }
+];
+
 export default function InsightsPage() {
   const [selected, setSelected] = useState<(typeof posts)[number] | null>(null);
   const [tab, setTab] = useState<"blogs" | "tips">("blogs");
@@ -86,7 +95,7 @@ export default function InsightsPage() {
 
       <main className="dl-bg">
         <section className="dl-hero">
-          <h1>Thoughts on data, design<br/> &amp; everything between.</h1>
+          <h1><span>Thoughts on data, design</span><br/><span>&amp; everything between.</span></h1>
           <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
           <div className="dl-tabs">
             <button className={tab === "blogs" ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
@@ -111,11 +120,21 @@ export default function InsightsPage() {
           </section>
         ) : (
           <section className="dl-tips">
-            <article><span>01</span><h2>Start with the business question.</h2><p>Before writing SQL or opening a dashboard, define the decision the analysis needs to support.</p></article>
-            <article><span>02</span><h2>Validate before you visualize.</h2><p>Reconcile key metrics and investigate anomalies before turning them into charts or recommendations.</p></article>
-            <article><span>03</span><h2>Design for the next action.</h2><p>A useful insight should make it easier to decide what to test, fix, scale, or investigate next.</p></article>
+            {tips.map((tip, index) => (
+              <article key={tip.id}>
+                <span>{String(index + 1).padStart(2,"0")}</span>
+                <h2>{tip.title}</h2>
+                <p>{tip.body}</p>
+                <button>Open Guide →</button>
+              </article>
+            ))}
           </section>
         )}
+
+        <footer className="dl-insights-footer">
+          <a href="/">← Return to Portfolio</a>
+          <p>Powered by <em>curiosity &amp; caffeine.</em></p>
+        </footer>
       </main>
 
       {selected && (
@@ -131,37 +150,43 @@ export default function InsightsPage() {
       <style jsx global>{`
         *{box-sizing:border-box}
         .dl-insights{min-height:100vh;color:#111827;background:#fff;font-family:Arial,Helvetica,sans-serif}
-        .dl-header{height:72px;padding:0 52px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e8e8e8;position:sticky;top:0;z-index:30}
-        .dl-brand{display:flex;align-items:center;gap:12px;color:#111827;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:13px}
-        .dl-brand img{width:25px;height:25px;object-fit:contain}
+        .dl-header{height:96px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e8e8e8;position:sticky;top:0;z-index:30}
+        .dl-brand{display:flex;align-items:center;gap:13px;color:#111827;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:13px}
+        .dl-brand img{width:26px;height:26px;object-fit:contain}
         .dl-header nav{display:flex;gap:30px;align-items:center}
         .dl-header nav a{font-size:12px;color:#666;text-decoration:none}
         .dl-header nav a.active{color:#111827}
-        .dl-bg{min-height:calc(100vh - 72px);background-image:linear-gradient(rgba(238,248,255,.68),rgba(248,238,255,.62)),url('/images/floral-bg-final.png');background-size:auto,440px 440px;background-repeat:repeat;background-position:center top}
-        .dl-hero{text-align:center;padding:84px 20px 54px}
-        .dl-hero h1{margin:0 auto;max-width:980px;font-size:66px;line-height:.95;letter-spacing:-.05em;font-weight:800;color:#111827}
-        .dl-hero p{max-width:690px;margin:22px auto 24px;font-size:16px;line-height:1.45;color:#4d5562}
+        .dl-bg{min-height:calc(100vh - 96px);background-image:url('/images/floral-bg-final.png');background-size:390px 390px;background-repeat:repeat;background-position:center top}
+        .dl-hero{text-align:center;padding:78px 20px 56px}
+        .dl-hero h1{margin:0 auto;max-width:1180px;font-size:64px;line-height:.96;letter-spacing:-.048em;font-weight:800;color:#111827}
+        .dl-hero h1 span{white-space:nowrap}
+        .dl-hero p{max-width:670px;margin:22px auto 23px;font-size:16px;line-height:1.45;color:#555d69}
         .dl-tabs{display:flex;justify-content:center;gap:8px}
         .dl-tabs button{border:1px solid #cbd5df;background:#fff;color:#1f2937;border-radius:999px;padding:10px 18px;font-weight:700;font-size:13px;cursor:pointer}
-        .dl-tabs button.active{background:#0a6f93;color:#fff;border-color:#0a6f93}
-        .dl-grid{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:0 0 90px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-        .dl-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 0 0 1px rgba(15,23,42,.08);cursor:pointer;transition:transform .2s ease}
-        .dl-card:hover{transform:translateY(-3px)}
-        .dl-image{aspect-ratio:1.62;overflow:hidden;background:#e8edf2}
+        .dl-tabs button.active{background:#0a708f;color:#fff;border-color:#0a708f}
+        .dl-grid{width:min(1000px,calc(100% - 48px));margin:0 auto;padding:0 0 88px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+        .dl-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(15,23,42,.08);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+        .dl-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,.08)}
+        .dl-image{aspect-ratio:1.58;overflow:hidden;background:#e8edf2}
         .dl-image img{width:100%;height:100%;object-fit:cover;display:block}
-        .dl-card-body{padding:18px 18px 22px}
+        .dl-card-body{padding:18px 18px 20px}
         .dl-card-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-        .dl-num{font-size:10px;color:#7c5cc4;font-weight:800}
-        .dl-cat{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#34758e;background:#edf7fa;border-radius:999px;padding:6px 9px;font-weight:700}
-        .dl-meta{display:flex;gap:14px;align-items:center;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin:0 0 11px}
-        .dl-card h2{font-size:23px;line-height:1.02;letter-spacing:-.04em;margin:0 0 12px;font-weight:800;color:#111827}
-        .dl-card p{font-size:13px;line-height:1.5;color:#687180;margin:0;min-height:78px}
-        .dl-read{margin-top:14px;border:0;background:transparent;color:#8053af;padding:0;font-size:11px;font-weight:600;cursor:pointer}
-        .dl-tips{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:0 0 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-        .dl-tips article{background:#fff;border-radius:15px;padding:28px;box-shadow:0 0 0 1px rgba(15,23,42,.08);min-height:220px}
-        .dl-tips span{color:#8062c7;font-size:11px;font-weight:700}
-        .dl-tips h2{font-size:25px;line-height:1.03;letter-spacing:-.03em;margin:10px 0 18px}
-        .dl-tips p{font-size:13px;color:#667085;line-height:1.55}
+        .dl-num{font-size:10px;color:#7756c2;font-weight:800}
+        .dl-cat{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#34758e;background:#edf7fa;border-radius:999px;padding:5px 8px;font-weight:700}
+        .dl-meta{display:flex;gap:11px;align-items:center;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#707784;margin:0 0 10px}
+        .dl-card h2{font-size:20px;line-height:1.05;letter-spacing:-.035em;margin:0 0 11px;font-weight:800;color:#111827}
+        .dl-card p{font-size:12px;line-height:1.55;color:#687180;margin:0;min-height:76px}
+        .dl-read{margin-top:14px;border:0;background:transparent;color:#8053af;padding:0;font-size:10px;font-weight:600;cursor:pointer}
+        .dl-tips{width:min(1000px,calc(100% - 48px));margin:0 auto;padding:0 0 88px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .dl-tips article{background:#fff;border-radius:14px;padding:27px 24px 22px;box-shadow:0 0 0 1px rgba(15,23,42,.08);min-height:210px;display:flex;flex-direction:column}
+        .dl-tips span{color:#7756c2;font-size:10px;font-weight:700}
+        .dl-tips h2{font-size:22px;line-height:1.05;letter-spacing:-.03em;margin:10px 0 18px}
+        .dl-tips p{font-size:12px;color:#667085;line-height:1.55;margin:0}
+        .dl-tips button{margin-top:auto;padding-top:18px;border:0;background:transparent;color:#8053af;text-align:left;font-size:10px;cursor:pointer}
+        .dl-insights-footer{height:102px;padding:0 68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.95);border-top:1px solid rgba(15,23,42,.08)}
+        .dl-insights-footer>a{color:#0b6d8d;text-decoration:none;font-size:14px;font-weight:700}
+        .dl-insights-footer p{margin:0;font-size:13px;font-weight:700;font-style:italic;color:#44b86a}
+        .dl-insights-footer em{font-style:italic;background:linear-gradient(90deg,#44b86a 0%,#4285f4 35%,#9c6ade 68%,#ff6f61 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
         .dl-modal-bg{position:fixed;inset:0;background:rgba(10,17,28,.7);z-index:100;display:grid;place-items:center;padding:30px;overflow:auto}
         .dl-modal{width:min(850px,100%);max-height:90vh;overflow:auto;background:#fff;position:relative}
         .dl-modal>img{width:100%;height:320px;object-fit:cover}
@@ -169,7 +194,7 @@ export default function InsightsPage() {
         .dl-modal-body{padding:40px 50px 55px}
         .dl-modal-body h2{font-size:44px;line-height:1.02;letter-spacing:-.04em;margin:8px 0 24px}
         .dl-modal-body p{font-size:16px;line-height:1.7;color:#505866}
-        @media(max-width:900px){.dl-header{height:auto;min-height:70px;padding:16px 20px}.dl-header nav{display:none}.dl-bg{background-size:auto,360px 360px}.dl-hero{padding:58px 18px 40px}.dl-hero h1{font-size:44px;line-height:.98}.dl-hero p{font-size:15px}.dl-grid,.dl-tips{grid-template-columns:1fr;width:min(620px,calc(100% - 30px))}.dl-card p{min-height:auto}.dl-modal-body{padding:32px 24px 42px}}
+        @media(max-width:900px){.dl-header{height:auto;min-height:72px;padding:16px 20px}.dl-header nav{display:none}.dl-bg{background-size:320px 320px}.dl-hero{padding:56px 18px 40px}.dl-hero h1{font-size:44px}.dl-hero h1 span{white-space:normal}.dl-hero p{font-size:15px}.dl-grid,.dl-tips{grid-template-columns:1fr;width:min(620px,calc(100% - 30px))}.dl-card p{min-height:auto}.dl-insights-footer{height:auto;min-height:100px;padding:28px 22px;gap:18px;flex-direction:column;align-items:flex-start}.dl-modal-body{padding:32px 24px 42px}}
       `}</style>
     </div>
   );

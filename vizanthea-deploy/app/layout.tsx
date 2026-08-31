@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import "./recovered.css";
+import "./exact-dataloom-tail.css";
 
 export const metadata: Metadata = {
   title: "VIZANTHEA — Shubhangi Borikar",

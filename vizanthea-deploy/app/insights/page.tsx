@@ -27,13 +27,7 @@ const posts = [
     date: "February 2026",
     readTime: "8 min read",
     excerpt: "Window functions, CTEs, and the art of writing queries that are both powerful and readable. These are the patterns I reach for daily.",
-    content: [
-      "SQL is the language of data, and like any language, fluency comes from mastering patterns, not memorizing syntax.",
-      "CTEs are your best friend for readability. Break complex queries into named steps so the logic remains easy to debug and maintain.",
-      "Window functions changed everything. ROW_NUMBER, LAG, LEAD, and running totals let you answer questions in a single query that would otherwise require multiple subqueries.",
-      "CASE WHEN is more powerful than most analysts realize. Use it for custom categorizations, conditional aggregations, and flexible business logic.",
-      "Always write queries as if someone else will maintain them. Code is read far more often than it is written."
-    ]
+    content: ["SQL is the language of data, and like any language, fluency comes from mastering patterns, not memorizing syntax.","CTEs are your best friend for readability. Break complex queries into named steps so the logic remains easy to debug and maintain.","Window functions changed everything. ROW_NUMBER, LAG, LEAD, and running totals let you answer questions in a single query that would otherwise require multiple subqueries.","CASE WHEN is more powerful than most analysts realize. Use it for custom categorizations, conditional aggregations, and flexible business logic.","Always write queries as if someone else will maintain them. Code is read far more often than it is written."]
   },
   {
     id: 3,
@@ -42,14 +36,8 @@ const posts = [
     thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop",
     date: "January 2026",
     readTime: "5 min read",
-    excerpt: "How I transform raw files into visual narratives that help stakeholders see what matters and what to do next.",
-    content: [
-      "Every great visualization starts with a messy spreadsheet and a question worth answering. The magic happens in the space between data and design.",
-      "Before opening Tableau, spend time with the data. Look for patterns, anomalies, and the moments that would surprise your audience.",
-      "Do not start with the chart type. Start with the insight, then choose the visual form that delivers it most clearly.",
-      "Annotations are the secret weapon of great visualizations. A well-placed callout turns a chart from interesting into actionable.",
-      "Finally, edit ruthlessly. The white space you create is as important as the data you show."
-    ]
+    excerpt: "How I transform raw files into visual narratives that help stakeholders understand what matters.",
+    content: ["Every great visualization starts with a messy spreadsheet and a question worth answering.","Before opening Tableau, spend time with the data. Look for patterns, anomalies, and the moments that would surprise your audience.","Do not start with the chart type. Start with the insight, then choose the visual form that delivers it most clearly.","Annotations are the secret weapon of great visualizations.","Finally, edit ruthlessly. The white space you create is as important as the data you show."]
   },
   {
     id: 4,
@@ -59,13 +47,7 @@ const posts = [
     date: "December 2025",
     readTime: "7 min read",
     excerpt: "Data culture is not about tools or dashboards — it is about making evidence the default language of decision-making.",
-    content: [
-      "You cannot install a data culture. It is built one conversation, one decision, and one ‘show me the data’ moment at a time.",
-      "Start by finding the people in each function who already think analytically and give them the context and tools to move faster.",
-      "Make data accessible, not merely available. A warehouse full of tables is not the same thing as trusted decision support.",
-      "Celebrate data-driven wins publicly. Stories change behavior faster than mandates.",
-      "Culture shifts slowly, but every small win compounds."
-    ]
+    content: ["You cannot install a data culture. It is built one conversation, one decision, and one ‘show me the data’ moment at a time.","Start by finding the people in each function who already think analytically.","Make data accessible, not merely available.","Celebrate data-driven wins publicly.","Culture shifts slowly, but every small win compounds."]
   },
   {
     id: 5,
@@ -75,13 +57,7 @@ const posts = [
     date: "November 2025",
     readTime: "9 min read",
     excerpt: "Useful predictive models start with a clear business question, thoughtful features, clean data, and a path to action.",
-    content: [
-      "Predictive analytics sounds intimidating, but many impactful models are surprisingly simple. You do not need deep learning; you need good features and clean data.",
-      "Start with a clear business question and define the decision the model is supposed to improve.",
-      "Feature engineering is where domain knowledge matters most. Understanding customer behavior often matters more than algorithmic sophistication.",
-      "Simple models can take you a long way when evaluation is rigorous and class imbalance is handled thoughtfully.",
-      "The real work is not building the model — it is embedding the output into a decision workflow."
-    ]
+    content: ["Predictive analytics sounds intimidating, but many impactful models are surprisingly simple.","Start with a clear business question and define the decision the model is supposed to improve.","Feature engineering is where domain knowledge matters most.","Simple models can take you a long way when evaluation is rigorous.","The real work is embedding the output into a decision workflow."]
   },
   {
     id: 6,
@@ -91,137 +67,69 @@ const posts = [
     date: "October 2025",
     readTime: "6 min read",
     excerpt: "Color should encode meaning, establish hierarchy, and guide attention — not simply decorate a chart.",
-    content: [
-      "Color in data visualization is not about making things pretty — it is about encoding information. Every color choice should have a reason.",
-      "Start with a limited palette. Too many colors create competition instead of hierarchy.",
-      "Use sequential scales for continuous values, diverging scales when a meaningful midpoint matters, and categorical colors for distinct groups.",
-      "Always consider accessibility and make sure important distinctions do not depend on color alone.",
-      "When in doubt, start with grey and add one highlight color only where attention is needed."
-    ]
+    content: ["Color in data visualization is about encoding information.","Start with a limited palette.","Use sequential scales for continuous values and diverging scales when a midpoint matters.","Always consider accessibility.","When in doubt, start with grey and add one highlight color only where attention is needed."]
   }
 ];
 
 export default function InsightsPage() {
   const [selected, setSelected] = useState<(typeof posts)[number] | null>(null);
+  const [tab, setTab] = useState<"blogs" | "tips">("blogs");
 
   return (
-    <div className="insights-page">
-      <header className="insights-header">
-        <a className="insights-brand" href="/">
-          <img src="/images/dataloom-icon-clean.png" alt="" />
-          <span>VIZANTHEA</span>
-        </a>
+    <div className="dl-insights">
+      <header className="dl-header">
+        <a href="/" className="dl-brand"><img src="/images/dataloom-icon-clean.png" alt=""/><span>VIZANTHEA</span></a>
         <nav>
-          <a href="/#about">About</a>
-          <a href="/#skills">Skills</a>
-          <a href="/#proof">Applied Practice</a>
-          <a href="/#experience">Experience</a>
-          <a className="active" href="/insights">Insights</a>
-          <a href="/#contact">Contact</a>
+          <a href="/#about">About</a><a href="/#skills">Skills</a><a href="/#proof">Applied Practice</a><a href="/#experience">Experience</a><a href="/insights">Insights</a><a href="/#contact">Contact</a>
         </nav>
       </header>
 
-      <main>
-        <section className="insights-hero">
-          <div className="insights-hero-inner">
-            <p className="eyebrow">S.06 · INSIGHTS</p>
-            <h1>Thoughts on data, design &amp; everything between.</h1>
-            <p className="lede">Writing about what I learn, what I build, and the occasional opinion nobody asked for.</p>
+      <main className="dl-bg">
+        <section className="dl-hero">
+          <h1>Thoughts on data, design<br className="desktop-break"/> &amp; everything between.</h1>
+          <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
+          <div className="dl-tabs">
+            <button className={tab === "blogs" ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
+            <button className={tab === "tips" ? "active" : ""} onClick={() => setTab("tips")}>Tips &amp; Tricks</button>
           </div>
         </section>
 
-        <section className="insights-grid-wrap">
-          <div className="insights-grid">
-            {posts.map((post) => (
-              <article className="insights-card" key={post.id} onClick={() => setSelected(post)}>
-                <button type="button" aria-label={`Read ${post.title}`}>
-                  <div className="insights-image-wrap">
-                    <img src={post.thumbnail} alt="" loading="lazy" />
-                    <span className="insights-category">{post.category}</span>
-                  </div>
-                  <div className="insights-card-copy">
-                    <div className="insights-meta"><span>{post.date}</span><span>{post.readTime}</span></div>
-                    <h2>{post.title}</h2>
-                    <p>{post.excerpt}</p>
-                    <span className="read-link">Read article <b>↗</b></span>
-                  </div>
-                </button>
+        {tab === "blogs" ? (
+          <section className="dl-grid">
+            {posts.map((post, index) => (
+              <article className="dl-card" key={post.id} onClick={() => setSelected(post)}>
+                <div className="dl-image"><img src={post.thumbnail} alt=""/><span>{post.category}</span></div>
+                <div className="dl-card-body">
+                  <div className="dl-card-top"><b>{String(index + 1).padStart(2,"0")}</b></div>
+                  <div className="dl-meta">{post.date}<span>·</span>{post.readTime}</div>
+                  <h2>{post.title}</h2>
+                  <p>{post.excerpt}</p>
+                  <button className="dl-read">Read Article →</button>
+                </div>
               </article>
             ))}
-          </div>
-        </section>
+          </section>
+        ) : (
+          <section className="dl-tips">
+            <article><span>01</span><h2>Start with the business question.</h2><p>Before writing SQL or opening a dashboard, define the decision the analysis needs to support.</p></article>
+            <article><span>02</span><h2>Validate before you visualize.</h2><p>Reconcile key metrics and investigate anomalies before turning them into charts or recommendations.</p></article>
+            <article><span>03</span><h2>Design for the next action.</h2><p>A useful insight should make it easier to decide what to test, fix, scale, or investigate next.</p></article>
+          </section>
+        )}
       </main>
 
-      <footer className="insights-footer">
-        <span>VIZANTHEA</span>
-        <a href="/">Back to portfolio ↑</a>
-      </footer>
-
       {selected && (
-        <div className="article-backdrop" onClick={() => setSelected(null)}>
-          <article className="article-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="close-modal" onClick={() => setSelected(null)} aria-label="Close article">×</button>
-            <img className="article-hero" src={selected.thumbnail} alt="" />
-            <div className="article-body">
-              <p className="eyebrow">{selected.category} · {selected.date} · {selected.readTime}</p>
-              <h2>{selected.title}</h2>
-              {selected.content.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
+        <div className="dl-modal-bg" onClick={() => setSelected(null)}>
+          <article className="dl-modal" onClick={e => e.stopPropagation()}>
+            <button className="dl-close" onClick={() => setSelected(null)}>×</button>
+            <img src={selected.thumbnail} alt=""/>
+            <div className="dl-modal-body"><div className="dl-meta">{selected.category} · {selected.date} · {selected.readTime}</div><h2>{selected.title}</h2>{selected.content.map((p,i)=><p key={i}>{p}</p>)}</div>
           </article>
         </div>
       )}
 
       <style jsx global>{`
-        .insights-page { min-height: 100vh; background: #f7f9fb; color: #151515; }
-        .insights-header { height: 72px; padding: 0 4vw; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.96); border-bottom: 1px solid rgba(15,23,42,.08); position: sticky; top: 0; z-index: 50; }
-        .insights-brand { display: inline-flex; align-items: center; gap: 11px; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; letter-spacing: .11em; text-decoration: none; color: #151515; }
-        .insights-brand img { width: 25px; height: 25px; object-fit: contain; }
-        .insights-header nav { display: flex; align-items: center; gap: 30px; }
-        .insights-header nav a { font-size: 12px; color: #676767; text-decoration: none; transition: color .2s ease; }
-        .insights-header nav a:hover, .insights-header nav a.active { color: #151515; }
-        .insights-hero { min-height: 470px; display: flex; align-items: flex-end; padding: 88px 4vw 70px; background: linear-gradient(rgba(239,247,255,.82),rgba(245,241,255,.82)), url('/images/floral-bg-final.png') center/520px repeat; border-bottom: 1px solid rgba(15,23,42,.08); }
-        .insights-hero-inner { width: min(1180px, 100%); margin: 0 auto; }
-        .eyebrow { margin: 0 0 18px; color: #5c5cff; font-size: 11px; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
-        .insights-hero h1 { max-width: 1040px; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(54px, 7vw, 112px); font-weight: 500; line-height: .94; letter-spacing: -.055em; }
-        .insights-hero .lede { max-width: 720px; margin: 30px 0 0; font-size: 18px; line-height: 1.6; color: #4e5560; }
-        .insights-grid-wrap { padding: 90px 4vw 120px; }
-        .insights-grid { width: min(1180px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 58px 34px; }
-        .insights-card { min-width: 0; }
-        .insights-card button { width: 100%; padding: 0; border: 0; background: transparent; text-align: left; color: inherit; cursor: pointer; }
-        .insights-image-wrap { position: relative; overflow: hidden; aspect-ratio: 16/10; background: #e8eaed; }
-        .insights-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
-        .insights-card:hover .insights-image-wrap img { transform: scale(1.025); }
-        .insights-category { position: absolute; left: 18px; bottom: 18px; background: rgba(255,255,255,.94); padding: 8px 11px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
-        .insights-card-copy { padding-top: 21px; }
-        .insights-meta { display: flex; gap: 16px; color: #828894; font-size: 11px; letter-spacing: .04em; }
-        .insights-card h2 { margin: 13px 0 12px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(29px, 3vw, 43px); line-height: 1.05; letter-spacing: -.035em; font-weight: 500; }
-        .insights-card p { max-width: 620px; margin: 0; color: #5e6470; font-size: 14px; line-height: 1.7; }
-        .read-link { display: inline-flex; gap: 8px; align-items: center; margin-top: 17px; font-size: 12px; font-weight: 650; }
-        .read-link b { font-size: 15px; }
-        .insights-footer { padding: 34px 4vw; display: flex; justify-content: space-between; border-top: 1px solid rgba(15,23,42,.1); background: white; font-size: 12px; letter-spacing: .08em; }
-        .insights-footer a { color: inherit; text-decoration: none; }
-        .article-backdrop { position: fixed; inset: 0; z-index: 100; padding: 5vh 20px; background: rgba(8,12,20,.68); display: grid; place-items: center; overflow-y: auto; }
-        .article-modal { position: relative; width: min(900px, 100%); max-height: 90vh; overflow-y: auto; background: #fff; box-shadow: 0 28px 80px rgba(0,0,0,.28); }
-        .close-modal { position: absolute; z-index: 2; right: 17px; top: 17px; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.95); font-size: 28px; cursor: pointer; }
-        .article-hero { width: 100%; height: 350px; object-fit: cover; }
-        .article-body { padding: 52px clamp(28px, 7vw, 78px) 65px; }
-        .article-body h2 { margin: 0 0 28px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(38px, 5vw, 64px); line-height: 1; letter-spacing: -.04em; font-weight: 500; }
-        .article-body > p:not(.eyebrow) { margin: 0 0 20px; color: #4d535d; font-size: 16px; line-height: 1.78; }
-        @media (max-width: 820px) {
-          .insights-header { height: auto; padding: 18px 22px; align-items: flex-start; gap: 18px; }
-          .insights-header nav { gap: 14px 18px; justify-content: flex-end; flex-wrap: wrap; }
-          .insights-header nav a { font-size: 10px; }
-          .insights-hero { min-height: 390px; padding: 65px 24px 52px; }
-          .insights-grid-wrap { padding: 64px 24px 86px; }
-          .insights-grid { grid-template-columns: 1fr; gap: 50px; }
-          .article-hero { height: 230px; }
-        }
-        @media (max-width: 560px) {
-          .insights-header { position: static; display: block; }
-          .insights-header nav { margin-top: 16px; justify-content: flex-start; }
-          .insights-hero h1 { font-size: 48px; }
-          .insights-hero .lede { font-size: 15px; }
-        }
+        *{box-sizing:border-box}.dl-insights{min-height:100vh;color:#101827;background:#fff;font-family:Arial,Helvetica,sans-serif}.dl-header{height:100px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #ececec;position:sticky;top:0;z-index:30}.dl-brand{display:flex;align-items:center;gap:14px;color:#111827;text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}.dl-brand img{width:28px;height:28px;object-fit:contain}.dl-header nav{display:flex;gap:28px}.dl-header nav a{font-size:13px;color:#555;text-decoration:none}.dl-bg{min-height:calc(100vh - 100px);background-image:linear-gradient(rgba(235,247,255,.83),rgba(245,236,255,.76)),url('/images/floral-pattern.svg');background-size:auto,330px 330px;background-repeat:repeat}.dl-hero{text-align:center;padding:82px 20px 56px}.dl-hero h1{margin:0 auto;max-width:760px;font-size:64px;line-height:.98;letter-spacing:-.045em;font-weight:800;color:#111827}.dl-hero p{max-width:650px;margin:22px auto 24px;font-size:18px;line-height:1.5;color:#505866}.dl-tabs{display:flex;justify-content:center;gap:10px}.dl-tabs button{border:1px solid #cdd6df;background:#fff;color:#1f2937;border-radius:999px;padding:13px 20px;font-weight:700;font-size:14px;cursor:pointer}.dl-tabs button.active{background:#0a6f93;color:#fff;border-color:#0a6f93}.dl-grid{width:min(1110px,calc(100% - 48px));margin:0 auto;padding:0 0 90px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.dl-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 0 0 1px rgba(15,23,42,.08);cursor:pointer;transition:transform .2s ease}.dl-card:hover{transform:translateY(-3px)}.dl-image{position:relative;aspect-ratio:1.55;overflow:hidden}.dl-image img{width:100%;height:100%;object-fit:cover;display:block}.dl-image span{position:absolute;right:16px;bottom:-12px;background:#eef8fb;color:#34758e;border-radius:999px;padding:8px 11px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.dl-card-body{padding:22px 20px 24px}.dl-card-top{height:13px;color:#8062c7;font-size:11px}.dl-meta{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#667085;display:flex;gap:8px;align-items:center;margin:12px 0 11px}.dl-card h2{font-size:26px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px;font-weight:800;color:#111827}.dl-card p{font-size:14px;line-height:1.55;color:#667085;margin:0;min-height:86px}.dl-read{margin-top:16px;border:0;background:transparent;color:#8558b7;padding:0;font-size:12px;font-weight:600;cursor:pointer}.dl-tips{width:min(1110px,calc(100% - 48px));margin:0 auto;padding:0 0 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.dl-tips article{background:#fff;border-radius:15px;padding:34px;box-shadow:0 0 0 1px rgba(15,23,42,.08)}.dl-tips span{color:#8062c7;font-size:12px;font-weight:700}.dl-tips h2{font-size:28px;line-height:1.05;letter-spacing:-.03em}.dl-tips p{color:#667085;line-height:1.6}.dl-modal-bg{position:fixed;inset:0;background:rgba(10,17,28,.7);z-index:100;display:grid;place-items:center;padding:30px;overflow:auto}.dl-modal{width:min(850px,100%);max-height:90vh;overflow:auto;background:#fff;position:relative}.dl-modal>img{width:100%;height:320px;object-fit:cover}.dl-close{position:absolute;right:16px;top:16px;width:40px;height:40px;border:0;border-radius:50%;background:#fff;font-size:28px;cursor:pointer}.dl-modal-body{padding:40px 50px 55px}.dl-modal-body h2{font-size:44px;line-height:1.02;letter-spacing:-.04em;margin:8px 0 24px}.dl-modal-body p{font-size:16px;line-height:1.7;color:#505866}.desktop-break{display:block}@media(max-width:900px){.dl-header{height:auto;min-height:76px;padding:18px 22px}.dl-header nav{display:none}.dl-hero{padding-top:58px}.dl-hero h1{font-size:46px}.dl-grid,.dl-tips{grid-template-columns:1fr;width:min(620px,calc(100% - 32px))}.dl-card p{min-height:auto}.desktop-break{display:none}.dl-modal-body{padding:32px 24px 42px}}
       `}</style>
     </div>
   );

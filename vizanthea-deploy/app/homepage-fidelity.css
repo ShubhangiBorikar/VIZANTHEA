@@ -1,0 +1,170 @@
+:root{
+  --font-display: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+/* Lock the original Data Loom type hierarchy. */
+body{font-family:var(--font-display)!important;background:#fbfbfa;color:#171719}
+h1,h2,h3{font-family:var(--font-display)!important;color:#171719}
+.hero h1{font-family:var(--font-display)!important;font-weight:800!important;letter-spacing:-.065em!important;line-height:.86!important}
+.hero-line,.lead,.quote,.questions,.closing,.ai-closing,.philosophy em,.contact-quote{font-family:var(--font-serif)!important}
+.section-label,.specialties,.availability,.date,.micro-label,.signal-head span,.finding span{font-family:var(--font-mono)!important}
+
+/* S.03 — Areas of Applied Practice: restore the light Data Loom treatment. */
+#proof.proof{
+  background:#f8faff!important;
+  color:#171719!important;
+  padding-top:92px!important;
+  padding-bottom:92px!important;
+}
+#proof *{box-sizing:border-box}
+#proof .section-label{color:#69696d!important;margin-bottom:42px!important}
+#proof .section-label span:first-child{color:#1459ff!important}
+#proof .section-label i{background:#dededb!important}
+#proof .proof-intro{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr)!important;
+  gap:8vw!important;
+  align-items:start!important;
+  margin-bottom:34px!important;
+}
+#proof .proof-intro h2{
+  margin:0!important;
+  max-width:760px!important;
+  font-family:var(--font-serif)!important;
+  font-weight:700!important;
+  font-size:clamp(44px,4.15vw,66px)!important;
+  line-height:.98!important;
+  letter-spacing:-.045em!important;
+  color:#171719!important;
+}
+#proof .proof-intro>p{
+  margin:7px 0 0!important;
+  max-width:610px!important;
+  color:#69696d!important;
+  font-size:15px!important;
+  line-height:1.6!important;
+}
+#proof .lens-panel{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  align-items:center!important;
+  gap:18px!important;
+  margin:0 0 18px!important;
+  padding:24px!important;
+  background:#fff!important;
+  color:#171719!important;
+  border:1px solid #dededb!important;
+  border-radius:15px!important;
+  box-shadow:none!important;
+}
+#proof .lens-panel h3{margin-top:7px!important;color:#171719!important;font-size:18px!important}
+#proof .micro-label{margin:0!important;color:#1459ff!important;letter-spacing:.12em!important;font-size:10px!important;font-weight:600!important;text-transform:uppercase!important}
+#proof .lens-buttons{display:flex!important;justify-content:flex-end!important;gap:7px!important;flex-wrap:wrap!important}
+#proof .lens-buttons button,#proof .investigation-buttons button{
+  appearance:none!important;
+  background:#fff!important;
+  color:#69696d!important;
+  border:1px solid #dededb!important;
+  border-radius:999px!important;
+  padding:8px 13px!important;
+  font-family:var(--font-display)!important;
+  font-size:11px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+}
+#proof .lens-buttons button.active,#proof .investigation-buttons button.active{background:#171719!important;color:#fff!important;border-color:#171719!important}
+#proof .lens-output{grid-column:1/-1!important;display:flex!important;gap:8px!important;flex-wrap:wrap!important}
+#proof .lens-output span{background:#e9f6f1!important;color:#275e51!important;border-radius:999px!important;padding:7px 10px!important;font-size:11px!important}
+
+#proof .case-study{
+  display:grid!important;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;
+  gap:4vw!important;
+  padding:34px!important;
+  background:#fff!important;
+  color:#171719!important;
+  border:1px solid #dededb!important;
+  border-radius:17px!important;
+  box-shadow:none!important;
+}
+#proof .case-copy{background:transparent!important;color:#171719!important}
+#proof .case-copy h2{
+  margin:13px 0 14px!important;
+  max-width:610px!important;
+  font-family:var(--font-serif)!important;
+  font-size:clamp(36px,3.15vw,50px)!important;
+  line-height:.98!important;
+  letter-spacing:-.04em!important;
+  color:#171719!important;
+}
+#proof .case-copy>p{color:#69696d!important;font-size:14px!important;line-height:1.55!important}
+#proof .investigation-buttons{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-top:27px!important}
+#proof .signal{
+  padding:25px!important;
+  background:#fcfcfb!important;
+  color:#171719!important;
+  border:1px solid #dededb!important;
+  border-radius:13px!important;
+}
+#proof .signal-head{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:16px!important}
+#proof .signal-head span,#proof .finding span{display:block!important;color:#69696d!important;font-size:10px!important;letter-spacing:.1em!important}
+#proof .signal-head strong{display:block!important;margin-top:3px!important;color:#171719!important;font-size:35px!important;letter-spacing:-.03em!important}
+#proof .signal-head b{background:#fff0f0!important;color:#b14646!important;border-radius:999px!important;padding:7px 10px!important;font-size:10px!important}
+#proof .signal svg{display:block!important;width:100%!important;height:auto!important;margin:14px 0!important;background:transparent!important}
+#proof .gridline{stroke:#e7e7e4!important;stroke-width:1!important}
+#proof .trendline{fill:none!important;stroke:#1459ff!important;stroke-width:3!important;stroke-linecap:round!important}
+#proof .signal circle{fill:#b14646!important}
+#proof .signal text{fill:#b14646!important;font-family:var(--font-mono)!important}
+#proof .finding{border-top:1px solid #dededb!important;margin-top:8px!important;padding-top:17px!important;background:transparent!important}
+#proof .finding>div{display:flex!important;justify-content:space-between!important;gap:14px!important}
+#proof .finding strong{color:#171719!important;font-size:13px!important}
+#proof .finding p{margin:7px 0 0!important;color:#69696d!important;font-size:12px!important;line-height:1.45!important}
+
+#proof .proof-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin-top:12px!important;
+}
+#proof .proof-grid article{
+  min-height:176px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  padding:24px!important;
+  background:#fff!important;
+  color:#171719!important;
+  border:1px solid #dededb!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+#proof .proof-grid article>span{color:#1459ff!important;font-family:var(--font-mono)!important;font-size:10px!important}
+#proof .proof-grid h3{margin:16px 0 10px!important;color:#171719!important;font-size:17px!important;letter-spacing:-.025em!important}
+#proof .proof-grid p{margin:0!important;color:#69696d!important;font-size:12px!important;line-height:1.5!important}
+#proof .proof-grid small{margin-top:auto!important;color:#7a7a7e!important;font-size:11px!important}
+
+/* Homepage footer — copyright and signature remain on one line exactly like Data Loom. */
+body>footer,main+footer{
+  min-height:118px!important;
+  padding:30px clamp(34px,4vw,70px)!important;
+  background:#fff!important;
+  border-top:1px solid #dededb!important;
+  color:#171719!important;
+}
+footer>div:first-child{display:flex!important;align-items:center!important;gap:12px!important;min-width:max-content!important}
+footer>div:first-child small{display:flex!important;align-items:center!important;gap:3px!important;white-space:nowrap!important;font-size:12px!important;line-height:1!important;color:#69696d!important}
+footer>div:first-child small br{display:none!important}
+footer>div:first-child small em{display:inline!important;margin:0!important;font-family:var(--font-display)!important;font-size:12px!important;font-weight:600!important;font-style:italic!important;background:linear-gradient(90deg,#78c850 0%,#30b8c8 45%,#8467cf 72%,#ef6f7b 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+footer nav{justify-self:center!important}
+footer .footer-links{justify-self:end!important}
+
+@media(max-width:900px){
+  #proof .proof-intro,#proof .case-study{grid-template-columns:1fr!important}
+  #proof .proof-grid{grid-template-columns:1fr 1fr!important}
+  #proof .lens-panel{grid-template-columns:1fr!important}
+  #proof .lens-buttons{justify-content:flex-start!important}
+  footer>div:first-child{min-width:0!important}
+  footer>div:first-child small{white-space:normal!important;flex-wrap:wrap!important}
+}
+@media(max-width:600px){#proof .proof-grid{grid-template-columns:1fr!important}}

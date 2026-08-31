@@ -80,13 +80,13 @@ export default function InsightsPage() {
       <header className="dl-header">
         <a href="/" className="dl-brand"><img src="/images/dataloom-icon-clean.png" alt=""/><span>VIZANTHEA</span></a>
         <nav>
-          <a href="/#about">About</a><a href="/#skills">Skills</a><a href="/#proof">Applied Practice</a><a href="/#experience">Experience</a><a href="/insights">Insights</a><a href="/#contact">Contact</a>
+          <a href="/#about">About</a><a href="/#skills">Skills</a><a href="/#proof">Applied Practice</a><a href="/#experience">Experience</a><a className="active" href="/insights">Insights</a><a href="/#contact">Contact</a>
         </nav>
       </header>
 
       <main className="dl-bg">
         <section className="dl-hero">
-          <h1>Thoughts on data, design<br className="desktop-break"/> &amp; everything between.</h1>
+          <h1>Thoughts on data, design<br/> &amp; everything between.</h1>
           <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
           <div className="dl-tabs">
             <button className={tab === "blogs" ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
@@ -98,10 +98,10 @@ export default function InsightsPage() {
           <section className="dl-grid">
             {posts.map((post, index) => (
               <article className="dl-card" key={post.id} onClick={() => setSelected(post)}>
-                <div className="dl-image"><img src={post.thumbnail} alt=""/><span>{post.category}</span></div>
+                <div className="dl-image"><img src={post.thumbnail} alt=""/></div>
                 <div className="dl-card-body">
-                  <div className="dl-card-top"><b>{String(index + 1).padStart(2,"0")}</b></div>
-                  <div className="dl-meta">{post.date}<span>·</span>{post.readTime}</div>
+                  <div className="dl-card-row"><span className="dl-num">{String(index + 1).padStart(2,"0")}</span><span className="dl-cat">{post.category}</span></div>
+                  <div className="dl-meta"><span>{post.date}</span><span>{post.readTime}</span></div>
                   <h2>{post.title}</h2>
                   <p>{post.excerpt}</p>
                   <button className="dl-read">Read Article →</button>
@@ -129,7 +129,47 @@ export default function InsightsPage() {
       )}
 
       <style jsx global>{`
-        *{box-sizing:border-box}.dl-insights{min-height:100vh;color:#101827;background:#fff;font-family:Arial,Helvetica,sans-serif}.dl-header{height:100px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #ececec;position:sticky;top:0;z-index:30}.dl-brand{display:flex;align-items:center;gap:14px;color:#111827;text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:14px}.dl-brand img{width:28px;height:28px;object-fit:contain}.dl-header nav{display:flex;gap:28px}.dl-header nav a{font-size:13px;color:#555;text-decoration:none}.dl-bg{min-height:calc(100vh - 100px);background-image:linear-gradient(rgba(235,247,255,.83),rgba(245,236,255,.76)),url('/images/floral-pattern.svg');background-size:auto,330px 330px;background-repeat:repeat}.dl-hero{text-align:center;padding:82px 20px 56px}.dl-hero h1{margin:0 auto;max-width:760px;font-size:64px;line-height:.98;letter-spacing:-.045em;font-weight:800;color:#111827}.dl-hero p{max-width:650px;margin:22px auto 24px;font-size:18px;line-height:1.5;color:#505866}.dl-tabs{display:flex;justify-content:center;gap:10px}.dl-tabs button{border:1px solid #cdd6df;background:#fff;color:#1f2937;border-radius:999px;padding:13px 20px;font-weight:700;font-size:14px;cursor:pointer}.dl-tabs button.active{background:#0a6f93;color:#fff;border-color:#0a6f93}.dl-grid{width:min(1110px,calc(100% - 48px));margin:0 auto;padding:0 0 90px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.dl-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 0 0 1px rgba(15,23,42,.08);cursor:pointer;transition:transform .2s ease}.dl-card:hover{transform:translateY(-3px)}.dl-image{position:relative;aspect-ratio:1.55;overflow:hidden}.dl-image img{width:100%;height:100%;object-fit:cover;display:block}.dl-image span{position:absolute;right:16px;bottom:-12px;background:#eef8fb;color:#34758e;border-radius:999px;padding:8px 11px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.dl-card-body{padding:22px 20px 24px}.dl-card-top{height:13px;color:#8062c7;font-size:11px}.dl-meta{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#667085;display:flex;gap:8px;align-items:center;margin:12px 0 11px}.dl-card h2{font-size:26px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px;font-weight:800;color:#111827}.dl-card p{font-size:14px;line-height:1.55;color:#667085;margin:0;min-height:86px}.dl-read{margin-top:16px;border:0;background:transparent;color:#8558b7;padding:0;font-size:12px;font-weight:600;cursor:pointer}.dl-tips{width:min(1110px,calc(100% - 48px));margin:0 auto;padding:0 0 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.dl-tips article{background:#fff;border-radius:15px;padding:34px;box-shadow:0 0 0 1px rgba(15,23,42,.08)}.dl-tips span{color:#8062c7;font-size:12px;font-weight:700}.dl-tips h2{font-size:28px;line-height:1.05;letter-spacing:-.03em}.dl-tips p{color:#667085;line-height:1.6}.dl-modal-bg{position:fixed;inset:0;background:rgba(10,17,28,.7);z-index:100;display:grid;place-items:center;padding:30px;overflow:auto}.dl-modal{width:min(850px,100%);max-height:90vh;overflow:auto;background:#fff;position:relative}.dl-modal>img{width:100%;height:320px;object-fit:cover}.dl-close{position:absolute;right:16px;top:16px;width:40px;height:40px;border:0;border-radius:50%;background:#fff;font-size:28px;cursor:pointer}.dl-modal-body{padding:40px 50px 55px}.dl-modal-body h2{font-size:44px;line-height:1.02;letter-spacing:-.04em;margin:8px 0 24px}.dl-modal-body p{font-size:16px;line-height:1.7;color:#505866}.desktop-break{display:block}@media(max-width:900px){.dl-header{height:auto;min-height:76px;padding:18px 22px}.dl-header nav{display:none}.dl-hero{padding-top:58px}.dl-hero h1{font-size:46px}.dl-grid,.dl-tips{grid-template-columns:1fr;width:min(620px,calc(100% - 32px))}.dl-card p{min-height:auto}.desktop-break{display:none}.dl-modal-body{padding:32px 24px 42px}}
+        *{box-sizing:border-box}
+        .dl-insights{min-height:100vh;color:#111827;background:#fff;font-family:Arial,Helvetica,sans-serif}
+        .dl-header{height:72px;padding:0 52px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e8e8e8;position:sticky;top:0;z-index:30}
+        .dl-brand{display:flex;align-items:center;gap:12px;color:#111827;text-decoration:none;font-weight:800;letter-spacing:.12em;font-size:13px}
+        .dl-brand img{width:25px;height:25px;object-fit:contain}
+        .dl-header nav{display:flex;gap:30px;align-items:center}
+        .dl-header nav a{font-size:12px;color:#666;text-decoration:none}
+        .dl-header nav a.active{color:#111827}
+        .dl-bg{min-height:calc(100vh - 72px);background-image:linear-gradient(rgba(238,248,255,.68),rgba(248,238,255,.62)),url('/images/floral-bg-final.png');background-size:auto,440px 440px;background-repeat:repeat;background-position:center top}
+        .dl-hero{text-align:center;padding:84px 20px 54px}
+        .dl-hero h1{margin:0 auto;max-width:980px;font-size:66px;line-height:.95;letter-spacing:-.05em;font-weight:800;color:#111827}
+        .dl-hero p{max-width:690px;margin:22px auto 24px;font-size:16px;line-height:1.45;color:#4d5562}
+        .dl-tabs{display:flex;justify-content:center;gap:8px}
+        .dl-tabs button{border:1px solid #cbd5df;background:#fff;color:#1f2937;border-radius:999px;padding:10px 18px;font-weight:700;font-size:13px;cursor:pointer}
+        .dl-tabs button.active{background:#0a6f93;color:#fff;border-color:#0a6f93}
+        .dl-grid{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:0 0 90px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+        .dl-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 0 0 1px rgba(15,23,42,.08);cursor:pointer;transition:transform .2s ease}
+        .dl-card:hover{transform:translateY(-3px)}
+        .dl-image{aspect-ratio:1.62;overflow:hidden;background:#e8edf2}
+        .dl-image img{width:100%;height:100%;object-fit:cover;display:block}
+        .dl-card-body{padding:18px 18px 22px}
+        .dl-card-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+        .dl-num{font-size:10px;color:#7c5cc4;font-weight:800}
+        .dl-cat{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#34758e;background:#edf7fa;border-radius:999px;padding:6px 9px;font-weight:700}
+        .dl-meta{display:flex;gap:14px;align-items:center;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin:0 0 11px}
+        .dl-card h2{font-size:23px;line-height:1.02;letter-spacing:-.04em;margin:0 0 12px;font-weight:800;color:#111827}
+        .dl-card p{font-size:13px;line-height:1.5;color:#687180;margin:0;min-height:78px}
+        .dl-read{margin-top:14px;border:0;background:transparent;color:#8053af;padding:0;font-size:11px;font-weight:600;cursor:pointer}
+        .dl-tips{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:0 0 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .dl-tips article{background:#fff;border-radius:15px;padding:28px;box-shadow:0 0 0 1px rgba(15,23,42,.08);min-height:220px}
+        .dl-tips span{color:#8062c7;font-size:11px;font-weight:700}
+        .dl-tips h2{font-size:25px;line-height:1.03;letter-spacing:-.03em;margin:10px 0 18px}
+        .dl-tips p{font-size:13px;color:#667085;line-height:1.55}
+        .dl-modal-bg{position:fixed;inset:0;background:rgba(10,17,28,.7);z-index:100;display:grid;place-items:center;padding:30px;overflow:auto}
+        .dl-modal{width:min(850px,100%);max-height:90vh;overflow:auto;background:#fff;position:relative}
+        .dl-modal>img{width:100%;height:320px;object-fit:cover}
+        .dl-close{position:absolute;right:16px;top:16px;width:40px;height:40px;border:0;border-radius:50%;background:#fff;font-size:28px;cursor:pointer}
+        .dl-modal-body{padding:40px 50px 55px}
+        .dl-modal-body h2{font-size:44px;line-height:1.02;letter-spacing:-.04em;margin:8px 0 24px}
+        .dl-modal-body p{font-size:16px;line-height:1.7;color:#505866}
+        @media(max-width:900px){.dl-header{height:auto;min-height:70px;padding:16px 20px}.dl-header nav{display:none}.dl-bg{background-size:auto,360px 360px}.dl-hero{padding:58px 18px 40px}.dl-hero h1{font-size:44px;line-height:.98}.dl-hero p{font-size:15px}.dl-grid,.dl-tips{grid-template-columns:1fr;width:min(620px,calc(100% - 30px))}.dl-card p{min-height:auto}.dl-modal-body{padding:32px 24px 42px}}
       `}</style>
     </div>
   );

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import React from "react";
-import { gunzipSync } from "node:zlib";
-import { productionCssGzipBase64 } from "./production-css";
+import "./recovered.css";
+import "./exact-dataloom-tail.css";
+import "./final-fidelity.css";
 
 export const metadata: Metadata = {
   title: "VIZANTHEA — Shubhangi Borikar",
   description: "Portfolio of Shubhangi Borikar, a product analytics professional turning complex data into confident business decisions.",
 };
-
-const productionCss = gunzipSync(Buffer.from(productionCssGzipBase64, "base64")).toString("utf8");
 
 const localizeRecoveredSite = `
 (() => {
@@ -88,7 +87,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <head>
         <link rel="icon" href="/images/dataloom-icon-clean.png" />
-        <style dangerouslySetInnerHTML={{ __html: productionCss }} />
       </head>
       <body>
         {children}

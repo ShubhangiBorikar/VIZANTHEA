@@ -46,7 +46,7 @@ const posts: BlogPost[] = [
     id: 2,
     title: "The SQL Patterns Every Analyst Should Know",
     category: "SQL",
-    thumbnail: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=800&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=800&fit=crop",
     date: "February 2026",
     readTime: "8 min read",
     excerpt: "Window functions, CTEs, and the art of writing queries that are both powerful and readable. These are the patterns I reach for daily.",
@@ -129,7 +129,7 @@ const tips: Tip[] = [
     id: 1,
     title: "Dynamic Parameter Actions in Tableau",
     category: "Tableau",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=800&fit=crop",
     difficulty: "Intermediate",
     tool: "Tableau",
     summary: "Use parameter actions to let people click a chart element and dynamically change the view.",
@@ -165,7 +165,7 @@ const tips: Tip[] = [
     id: 3,
     title: "Building Small Multiples in Tableau",
     category: "Tableau",
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=800&fit=crop",
     difficulty: "Intermediate",
     tool: "Tableau",
     summary: "Build repeated charts across categories so comparisons become faster and more reliable.",
@@ -201,7 +201,7 @@ const tips: Tip[] = [
     id: 5,
     title: "The Art of Effective Color Palettes",
     category: "Design",
-    thumbnail: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&h=800&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=1200&h=800&fit=crop",
     difficulty: "Beginner",
     tool: "Design",
     summary: "Choose accessible palettes that guide attention without overwhelming the information.",
@@ -236,11 +236,8 @@ const tips: Tip[] = [
 ];
 
 export default function InsightsPage() {
-  const [tab, setTab] = useState<"blogs" | "tips">("blogs");
   const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
   const [selectedTip, setSelectedTip] = useState<Tip | null>(null);
-
-  const isBlogs = tab === "blogs";
 
   return (
     <div className="insights-page">
@@ -260,48 +257,37 @@ export default function InsightsPage() {
       </header>
 
       <section className="insights-hero">
-        {isBlogs ? (
-          <>
-            <h1>Thoughts on data, design &amp;<br />everything between.</h1>
-            <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
-          </>
-        ) : (
-          <>
-            <h1>Quick wins &amp; practical deep<br />dives.</h1>
-            <p>Practical techniques collected along the way—from Tableau and SQL to Snowflake, Python, and design.</p>
-          </>
-        )}
-        <div className="insights-tabs">
-          <button className={isBlogs ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
-          <button className={!isBlogs ? "active" : ""} onClick={() => setTab("tips")}>Tips &amp; Tricks</button>
-        </div>
+        <h1>Thoughts on data, design &amp;<br />everything between.</h1>
+        <p>Writing about what I learn, what I build, and practical techniques that make analytical work clearer, faster, and more useful.</p>
       </section>
 
       <main className="insights-content">
         <section className="insights-grid">
-          {isBlogs ? posts.map((post, index) => (
-            <button className="insights-card" key={post.id} onClick={() => setSelectedBlog(post)}>
+          {posts.map((post, index) => (
+            <button className="insights-card" key={`blog-${post.id}`} onClick={() => setSelectedBlog(post)}>
               <img src={post.thumbnail} alt={post.title} />
               <div className="insights-card-copy">
                 <div className="insights-card-top">
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <b>{post.category}</b>
                 </div>
-                <div className="insights-meta"><span>{post.date}</span><span>{post.readTime}</span></div>
+                <div className="insights-meta"><span>Article</span><span>{post.date}</span><span>{post.readTime}</span></div>
                 <h2>{post.title}</h2>
                 <p>{post.excerpt}</p>
                 <small>Read Article →</small>
               </div>
             </button>
-          )) : tips.map((tip, index) => (
-            <button className="insights-card" key={tip.id} onClick={() => setSelectedTip(tip)}>
+          ))}
+
+          {tips.map((tip, index) => (
+            <button className="insights-card" key={`guide-${tip.id}`} onClick={() => setSelectedTip(tip)}>
               <img src={tip.thumbnail} alt={tip.title} />
               <div className="insights-card-copy">
                 <div className="insights-card-top">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>{String(posts.length + index + 1).padStart(2, "0")}</span>
                   <b>{tip.category}</b>
                 </div>
-                <div className="insights-meta"><span>{tip.difficulty}</span><span>{tip.tool}</span></div>
+                <div className="insights-meta"><span>Guide</span><span>{tip.difficulty}</span><span>{tip.tool}</span></div>
                 <h2>{tip.title}</h2>
                 <p>{tip.summary}</p>
                 <small>Open Guide →</small>

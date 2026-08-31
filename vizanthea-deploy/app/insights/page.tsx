@@ -16,7 +16,13 @@ type BlogPost = {
 type Tip = {
   id: number;
   title: string;
-  body: string;
+  category: string;
+  thumbnail: string;
+  difficulty: string;
+  tool: string;
+  summary: string;
+  steps: string[];
+  proTip: string;
 };
 
 const posts: BlogPost[] = [
@@ -91,7 +97,7 @@ const posts: BlogPost[] = [
     thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1200&h=800&fit=crop",
     date: "November 2025",
     readTime: "9 min read",
-    excerpt: "You don’t need a PhD to build useful predictive models. Here’s a practical guide to getting started with customer churn prediction.",
+    excerpt: "A practical introduction to building useful predictive models, beginning with a customer-churn example.",
     content: [
       "Predictive analytics sounds intimidating, but the most impactful models are often surprisingly simple. You don’t need deep learning — you need good features and clean data.",
       "Start with a clear business question: Which customers are likely to churn in the next 90 days? What factors drive repeat purchases? Which leads will convert?",
@@ -107,13 +113,13 @@ const posts: BlogPost[] = [
     thumbnail: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&h=800&fit=crop",
     date: "October 2025",
     readTime: "6 min read",
-    excerpt: "Color choices can make or break your visualization. Learn the principles that separate amateur charts from professional-grade data design.",
+    excerpt: "How thoughtful color choices improve hierarchy, accessibility, and understanding in analytical work.",
     content: [
       "Color in data visualization isn’t about making things pretty — it’s about encoding information. Every color choice should have a reason.",
       "Start with a limited palette. Three to five colors is usually enough. More than that and your visualization becomes a rainbow of confusion.",
-      "Use sequential color scales for continuous data (light to dark), diverging scales for data with a meaningful midpoint, and categorical colors for distinct groups.",
-      "Always consider accessibility. About 8% of men have some form of color vision deficiency. Test your visualizations with colorblind simulation tools.",
-      "When in doubt, start with grey. Make everything grey, then add color only to the elements that need attention. This ‘grey + one highlight color’ approach is remarkably effective."
+      "Use sequential color scales for continuous data, diverging scales for data with a meaningful midpoint, and categorical colors for distinct groups.",
+      "Always consider accessibility. Test your visualizations with colorblind simulation tools.",
+      "When in doubt, start with grey. Make everything grey, then add color only to the elements that need attention."
     ]
   }
 ];
@@ -121,39 +127,120 @@ const posts: BlogPost[] = [
 const tips: Tip[] = [
   {
     id: 1,
-    title: "Start with the business question.",
-    body: "Before writing SQL or opening a dashboard, define the decision the analysis needs to support."
+    title: "Dynamic Parameter Actions in Tableau",
+    category: "Tableau",
+    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop",
+    difficulty: "Intermediate",
+    tool: "Tableau",
+    summary: "Use parameter actions to let people click a chart element and dynamically change the view.",
+    steps: [
+      "Create a parameter with the data type matching your target field.",
+      "Build a calculated field that references the parameter for filtering or highlighting.",
+      "Add the visualization to the dashboard and create a Parameter Action.",
+      "Set the source sheet, target parameter, and source field.",
+      "Configure the action to run on Select and clear on deselection.",
+      "Test the interaction across every dependent sheet."
+    ],
+    proTip: "Combine parameter actions with set actions for richer click-through exploration."
   },
   {
     id: 2,
-    title: "Validate before you visualize.",
-    body: "Reconcile key metrics and investigate anomalies before turning them into charts or recommendations."
+    title: "Window Functions: The Complete Cheat Sheet",
+    category: "SQL",
+    thumbnail: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=800&fit=crop",
+    difficulty: "Advanced",
+    tool: "SQL",
+    summary: "Master ROW_NUMBER, RANK, LAG, LEAD, and running SUM patterns.",
+    steps: [
+      "Use ROW_NUMBER() for deduplication and top-N-per-group problems.",
+      "Use RANK() or DENSE_RANK() when ties matter.",
+      "Use LAG() and LEAD() for period-over-period comparisons.",
+      "Use SUM() OVER (...) for running totals and cumulative metrics.",
+      "Combine PARTITION BY and ORDER BY deliberately.",
+      "Use explicit window frames for moving averages and sliding calculations."
+    ],
+    proTip: "Name repeated windows when your SQL dialect supports it; readability improves immediately."
   },
   {
     id: 3,
-    title: "Design for the next action.",
-    body: "A useful insight should make it easier to decide what to test, fix, scale, or investigate next."
+    title: "Building Small Multiples in Tableau",
+    category: "Tableau",
+    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop",
+    difficulty: "Intermediate",
+    tool: "Tableau",
+    summary: "Build repeated charts across categories so comparisons become faster and more reliable.",
+    steps: [
+      "Start with one clean chart for the metric you want to compare.",
+      "Add the categorical dimension to Rows or Columns to create repeated panels.",
+      "Keep each panel the same size.",
+      "Synchronize axes so comparisons remain valid.",
+      "Use reference lines sparingly when they add context.",
+      "Reduce decorative formatting and let the repeated pattern carry the comparison."
+    ],
+    proTip: "Small multiples are strongest when each panel uses the same scale and visual encoding."
   },
   {
     id: 4,
-    title: "Separate signal from noise.",
-    body: "Check whether a movement is structural, seasonal, segment-specific, or simply a data-quality issue."
+    title: "Snowflake Performance Tuning Essentials",
+    category: "Snowflake",
+    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop",
+    difficulty: "Advanced",
+    tool: "Snowflake",
+    summary: "Practical considerations for warehouse sizing, pruning, query structure, and clustering.",
+    steps: [
+      "Right-size the warehouse before simply scaling compute upward.",
+      "Use result caching and avoid unnecessary sorts.",
+      "Filter in ways that improve micro-partition pruning.",
+      "Replace expensive row-by-row logic with set-based joins and CTEs.",
+      "Use bulk loading patterns for larger ingestion jobs.",
+      "Review query history and warehouse metering to find the real cost drivers."
+    ],
+    proTip: "Auto-suspend development warehouses aggressively so idle compute does not become silent spend."
   },
   {
     id: 5,
-    title: "Make assumptions visible.",
-    body: "Forecasts and recommendations become more trustworthy when assumptions, risks, and guardrails are explicit."
+    title: "The Art of Effective Color Palettes",
+    category: "Design",
+    thumbnail: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&h=800&fit=crop",
+    difficulty: "Beginner",
+    tool: "Design",
+    summary: "Choose accessible palettes that guide attention without overwhelming the information.",
+    steps: [
+      "Start with one anchor or brand color.",
+      "Use sequential palettes for ordered values and diverging palettes for meaningful midpoints.",
+      "Keep categorical palettes intentionally limited.",
+      "Test for color-vision accessibility.",
+      "Use neutral greys for context and stronger color for focus.",
+      "Create a reusable palette library for consistency."
+    ],
+    proTip: "A restrained palette usually communicates hierarchy better than a rainbow palette."
   },
   {
     id: 6,
-    title: "End with what happens next.",
-    body: "A strong analysis closes with a decision, experiment, owner, or next question—not another chart."
+    title: "Python + Pandas: Data Cleaning Recipes",
+    category: "Python",
+    thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=800&fit=crop",
+    difficulty: "Beginner",
+    tool: "Python",
+    summary: "Reusable patterns for missing values, reshaping, validation, and common cleanup tasks.",
+    steps: [
+      "Inspect types, nulls, and distributions before changing the data.",
+      "Choose dropna() versus fillna() based on why values are missing.",
+      "Check duplicate rows and business-key duplicates separately.",
+      "Convert date fields to consistent datetime types early.",
+      "Standardize text values before joins and grouping.",
+      "Use melt() and pivot_table() to reshape datasets for analysis and visualization."
+    ],
+    proTip: "Package repeated cleaning logic into small reusable functions so the same source is treated consistently every time."
   }
 ];
 
 export default function InsightsPage() {
   const [tab, setTab] = useState<"blogs" | "tips">("blogs");
   const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
+  const [selectedTip, setSelectedTip] = useState<Tip | null>(null);
+
+  const isBlogs = tab === "blogs";
 
   return (
     <div className="insights-page">
@@ -173,17 +260,26 @@ export default function InsightsPage() {
       </header>
 
       <section className="insights-hero">
-        <h1>Thoughts on data, design<br />&amp; everything between.</h1>
-        <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
+        {isBlogs ? (
+          <>
+            <h1>Thoughts on data, design &amp;<br />everything between.</h1>
+            <p>Writing about what I learn, what I build, and the questions that keep analytical work interesting.</p>
+          </>
+        ) : (
+          <>
+            <h1>Quick wins &amp; practical deep<br />dives.</h1>
+            <p>Practical techniques collected along the way—from Tableau and SQL to Snowflake, Python, and design.</p>
+          </>
+        )}
         <div className="insights-tabs">
-          <button className={tab === "blogs" ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
-          <button className={tab === "tips" ? "active" : ""} onClick={() => setTab("tips")}>Tips &amp; Tricks</button>
+          <button className={isBlogs ? "active" : ""} onClick={() => setTab("blogs")}>Blogs</button>
+          <button className={!isBlogs ? "active" : ""} onClick={() => setTab("tips")}>Tips &amp; Tricks</button>
         </div>
       </section>
 
       <main className="insights-content">
         <section className="insights-grid">
-          {tab === "blogs" ? posts.map((post, index) => (
+          {isBlogs ? posts.map((post, index) => (
             <button className="insights-card" key={post.id} onClick={() => setSelectedBlog(post)}>
               <img src={post.thumbnail} alt={post.title} />
               <div className="insights-card-copy">
@@ -198,14 +294,19 @@ export default function InsightsPage() {
               </div>
             </button>
           )) : tips.map((tip, index) => (
-            <article key={tip.id} className="insights-tip-card">
-              <div className="insights-card-top">
-                <span>{String(index + 1).padStart(2, "0")}</span>
+            <button className="insights-card" key={tip.id} onClick={() => setSelectedTip(tip)}>
+              <img src={tip.thumbnail} alt={tip.title} />
+              <div className="insights-card-copy">
+                <div className="insights-card-top">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <b>{tip.category}</b>
+                </div>
+                <div className="insights-meta"><span>{tip.difficulty}</span><span>{tip.tool}</span></div>
+                <h2>{tip.title}</h2>
+                <p>{tip.summary}</p>
+                <small>Open Guide →</small>
               </div>
-              <h2>{tip.title}</h2>
-              <p>{tip.body}</p>
-              <small>Open Guide →</small>
-            </article>
+            </button>
           ))}
         </section>
       </main>
@@ -229,18 +330,21 @@ export default function InsightsPage() {
         </div>
       )}
 
-      <style jsx global>{`
-        .insights-page {
-          min-height: 100vh;
-          background-image: url('/images/floral-bg-final.png') !important;
-          background-repeat: repeat !important;
-          background-size: 520px 520px !important;
-          background-position: center top !important;
-        }
-        .insights-header { background: rgba(255,255,255,.98) !important; }
-        .insights-content { background: transparent !important; }
-        .insights-tip-card { cursor: default; }
-      `}</style>
+      {selectedTip && (
+        <div className="insights-modal-backdrop" onClick={() => setSelectedTip(null)}>
+          <article className="insights-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="insights-modal-close" onClick={() => setSelectedTip(null)}>×</button>
+            <img src={selectedTip.thumbnail} alt={selectedTip.title} />
+            <div className="insights-modal-body">
+              <div className="insights-modal-meta"><b>{selectedTip.category}</b><span>{selectedTip.difficulty}</span><span>{selectedTip.tool}</span></div>
+              <h2>{selectedTip.title}</h2>
+              <p>{selectedTip.summary}</p>
+              <ol>{selectedTip.steps.map((step, index) => <li key={index}>{step}</li>)}</ol>
+              <aside><strong>Pro tip</strong><p>{selectedTip.proTip}</p></aside>
+            </div>
+          </article>
+        </div>
+      )}
     </div>
   );
 }

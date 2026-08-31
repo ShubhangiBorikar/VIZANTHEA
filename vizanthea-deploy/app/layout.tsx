@@ -72,6 +72,77 @@ const localizeRecoveredSite = `
         ].join('');
         proofGrid.insertAdjacentHTML('afterend', extraProofMarkup);
       }
+
+      const roleStates = [
+        ['Feature adoption', 'Journey friction', 'Experiment design'],
+        ['Campaign response', 'Audience quality', 'Incremental lift'],
+        ['Retention', 'Churn drivers', 'Lifetime value'],
+        ['Governed KPIs', 'Forecasting', 'Decision systems']
+      ];
+      const roleButtons = Array.from(proof.querySelectorAll('.lens-buttons button'));
+      const roleOutputs = Array.from(proof.querySelectorAll('.lens-output span'));
+      roleButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          roleButtons.forEach((b) => b.classList.remove('active'));
+          button.classList.add('active');
+          const values = roleStates[index] || roleStates[0];
+          roleOutputs.forEach((span, outputIndex) => {
+            if (values[outputIndex]) span.textContent = values[outputIndex];
+          });
+        });
+      });
+
+      const investigationStates = [
+        {
+          finding: 'Newer customers declined first',
+          detail: 'The movement is concentrated in early-tenure cohorts.',
+          action: 'Test a simplified renewal path for the affected group.'
+        },
+        {
+          finding: 'Checks support a genuine business signal',
+          detail: 'Source totals, eligibility rules, and metric definitions reconcile.',
+          action: 'Continue with behavioral analysis after documenting the validation results.'
+        },
+        {
+          finding: 'Drop-off moved downstream',
+          detail: 'Customers enter renewal but fewer complete the final confirmation.',
+          action: 'Compare the current journey against a shorter controlled experience.'
+        },
+        {
+          finding: 'Exposure remained stable',
+          detail: 'Response weakened despite consistent offer reach.',
+          action: 'Test clearer value framing before changing price.'
+        }
+      ];
+      const investigationButtons = Array.from(proof.querySelectorAll('.investigation-buttons button'));
+      const finding = proof.querySelector('.finding');
+      const findingStrong = finding?.querySelector('strong');
+      const findingParagraphs = finding ? Array.from(finding.querySelectorAll('p')) : [];
+      investigationButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          investigationButtons.forEach((b) => b.classList.remove('active'));
+          button.classList.add('active');
+          const state = investigationStates[index] || investigationStates[0];
+          if (findingStrong) findingStrong.textContent = state.finding;
+          if (findingParagraphs[0]) findingParagraphs[0].textContent = state.detail;
+          if (findingParagraphs[1]) findingParagraphs[1].innerHTML = '<b>Next action:</b> ' + state.action;
+        });
+      });
+
+      const askStates = [
+        'I connect customer, product, revenue, and operational signals—then translate them into governed metrics, forecasts, experiments, and decisions.',
+        'I use AI to accelerate SQL and Python development, validation, documentation, investigation paths, and stakeholder-ready storytelling while keeping human judgment in control.',
+        'My experience is especially relevant to Product, Marketing, Growth, Lifecycle, Customer, or Data Strategy analytics where ambiguous questions require technical depth and business judgment.'
+      ];
+      const askButtons = Array.from(proof.querySelectorAll('.ask-buttons button'));
+      const answer = proof.querySelector('.portfolio-answer');
+      askButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          askButtons.forEach((b) => b.classList.remove('active'));
+          button.classList.add('active');
+          if (answer) answer.textContent = askStates[index] || askStates[0];
+        });
+      });
     }
   };
 
